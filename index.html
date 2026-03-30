@@ -1,43 +1,539 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Shadow.net | Documentation</title>
-        <link rel="stylesheet" href="main/index.css"/>
-        <link rel="stylesheet" href="hikka/index.css"/>
-        <link rel="stylesheet" href="heroku/index.css"/>
-        <link rel="stylesheet" href="legacy/index.css"/>
-    </head>
-    <body>
-        <img src="assets/fon.webp" alt="Background" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
-        <div class="main-container">
-            <h1 class="main-title">Shadow.net</h1>
-            <p class="main-subtitle">Сборник пользовательских ботов и их документации!</p>
-            
-            <div class="archive-links">
-                <a href="heroku/index.html" class="archive-link heroku">
-                    Heroku Documentation
-                    <span class="archive-label">Сборник важной информации о Heroku</span>
-                </a>
-                
-                <a href="hikka/index.html" class="archive-link hikka">
-                    Hikka Documentation
-                    <span class="archive-label">Сборник важной информации о Hikka</span>
-                </a>
-                
-                <a href="legacy/index.html" class="archive-link legacy">
-                    Legacy Documentation
-                    <span class="archive-label">Сборник важной информации о legacy</span>
-                </a>
+<head>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow.net | Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00f2ff;
+            --secondary: #ff00ff;
+            --accent: #7700ff;
+            --dark: #0a0a0f;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--dark);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 242, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.6;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        @keyframes float {
+            from { transform: translateY(100vh) translateX(0); }
+            to { transform: translateY(-10vh) translateX(100px); }
+        }
+
+        header {
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            animation: glow 3s ease-in-out infinite alternate;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo::after {
+            content: 'SHADOW.NET';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(20px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.5)); }
+            to { filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.5)); }
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.6s ease;
+            min-height: 380px;
+        }
+
+        .card-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+            transition: transform 0.6s ease;
+        }
+
+        .card-heroku .card-bg {
+            background-image: url('assets/fon_heroku.jpg');
+        }
+
+        .card-hikka .card-bg {
+            background-image: url('assets/fon_hikka.jpeg');
+        }
+
+        .card-legacy .card-bg {
+            background-image: url('assets/fon_legacy.jpg');
+        }
+
+        .card:hover .card-bg {
+            transform: scale(1.1);
+        }
+
+        /* Gradient Overlay поверх фото */
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10,10,15,0.7) 0%, rgba(10,10,15,0.85) 50%, rgba(10,10,15,0.9) 100%);
+            z-index: 1;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover .card-overlay {
+            opacity: 0.95;
+            background: linear-gradient(135deg, rgba(10,10,15,0.6) 0%, rgba(10,10,15,0.75) 50%, rgba(10,10,15,0.85) 100%);
+        }
+
+        /* Content Layer */
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 2.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-icon {
+            transform: rotate(-5deg) scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-icon svg {
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, rgba(255,255,255,0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+            width: fit-content;
+        }
+
+        .btn:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+            transform: translateX(5px);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.8), rgba(119, 0, 255, 0.8));
+            border: none;
+            box-shadow: 0 4px 20px rgba(0, 242, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 30px rgba(0, 242, 255, 0.5);
+            transform: translateX(5px) scale(1.05);
+        }
+
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            top: 10%;
+            right: 10%;
+            animation: drift 20s infinite;
+        }
+
+        .orb-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--secondary);
+            bottom: 20%;
+            left: 10%;
+            animation: drift 15s infinite reverse;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-30px, 30px); }
+            50% { transform: translate(20px, -20px); }
+            75% { transform: translate(-20px, -30px); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: rgba(255, 255, 255, 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 2.5rem; }
+            .container { grid-template-columns: 1fr; padding: 1rem; }
+            .card-content { padding: 1.5rem; }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--accent));
+            border-radius: 4px;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-text">SHADOW.NET</div>
+    </div>
+
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <header>
+        <h1 class="logo">Shadow.net</h1>
+        <p class="subtitle">Сборник пользовательских ботов и их документации</p>
+    </header>
+
+    <div class="container">
+        <!-- Heroku Card -->
+        <div class="card card-heroku" onclick="window.location.href='heroku/index.html'">
+            <div class="card-bg"></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+                <div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 200 200" class="saturn">
+                            <defs>
+                                <linearGradient id="planetGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffffff" />
+                                    <stop offset="100%" style="stop-color:#e2e8f0" />
+                                </linearGradient>
+                                <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#ffffff" />
+                                    <stop offset="100%" style="stop-color:#e2e8f0" />
+                                </linearGradient>
+                            </defs>
+                            <ellipse class="ring back-ring" cx="100" cy="100" rx="80" ry="20" fill="none" stroke="url(#ringGradient)" stroke-width="2" opacity="0.5" />
+                            <circle class="planet" cx="100" cy="100" r="40" fill="url(#planetGradient)" />
+                            <ellipse class="ring front-ring" cx="100" cy="100" rx="80" ry="20" fill="none" stroke="url(#ringGradient)" stroke-width="2.5" />
+                            <circle cx="140" cy="100" r="3" fill="#ffffff" />
+                            <circle cx="160" cy="100" r="2" fill="#ffffff" />
+                            <circle cx="120" cy="95" r="2" fill="#ffffff" />
+                            <circle cx="180" cy="102" r="1" fill="#ffffff" />
+                        </svg>
+                    </div>
+                    <h2>Heroku Documentation</h2>
+                    <p>Сборник важной информации о Heroku.</p>
+                </div>
+                <a href="heroku/index.html" class="btn btn-primary">Открыть документацию →</a>
             </div>
         </div>
-        
-        <script src="main/index.js"></script>
-        <script src="hikka/index.js"></script>
-        <script src="heroku/index.js"></script>
-        <script src="legacy/index.js"></script>
-    </body>
+
+        <!-- Hikka Card -->
+        <div class="card card-hikka" onclick="window.location.href='hikka/index.html'">
+            <div class="card-bg"></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+                <div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 200 200" class="moon-full">
+                            <defs>
+                                <radialGradient id="moonGradient" cx="30%" cy="30%" r="70%">
+                                    <stop offset="0%" style="stop-color:#f8fafc" />
+                                    <stop offset="50%" style="stop-color:#e2e8f0" />
+                                    <stop offset="100%" style="stop-color:#94a3b8" />
+                                </radialGradient>
+                                <radialGradient id="craterGradient" cx="30%" cy="30%" r="70%">
+                                    <stop offset="0%" style="stop-color:#cbd5e1" />
+                                    <stop offset="100%" style="stop-color:#64748b" />
+                                </radialGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            <circle cx="100" cy="100" r="50" fill="url(#moonGradient)" filter="url(#glow)" />
+                            <circle cx="85" cy="85" r="8" fill="url(#craterGradient)" opacity="0.6" />
+                            <circle cx="115" cy="95" r="12" fill="url(#craterGradient)" opacity="0.5" />
+                            <circle cx="95" cy="120" r="6" fill="url(#craterGradient)" opacity="0.4" />
+                            <circle cx="125" cy="110" r="5" fill="url(#craterGradient)" opacity="0.5" />
+                            <circle cx="75" cy="105" r="4" fill="url(#craterGradient)" opacity="0.4" />
+                            <circle cx="105" cy="75" r="6" fill="url(#craterGradient)" opacity="0.5" />
+                            <circle cx="130" cy="85" r="3" fill="url(#craterGradient)" opacity="0.4" />
+                        </svg>
+                    </div>
+                    <h2>Hikka Documentation</h2>
+                    <p>Сборник важной информации о Hikka.</p>
+                </div>
+                <a href="hikka/index.html" class="btn btn-primary" style="background: linear-gradient(135deg, rgba(255, 0, 255, 0.8), rgba(119, 0, 255, 0.8));">Открыть документацию →</a>
+            </div>
+        </div>
+
+        <!-- Legacy Card -->
+        <div class="card card-legacy" onclick="window.location.href='legacy/index.html'">
+            <div class="card-bg"></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+                <div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 65.3 65.3" class="moon-crescent" style="fill: #ffffff; filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));">
+                            <g>
+                                <g>
+                                    <path d="M35.853,65.3c-18.089,0-32.805-14.565-32.805-32.655C3.048,14.791,17.573,0,35.427,0c0.01,0,0.018,0,0.025,0
+                                        c0.757,0,1.449,0.278,1.789,0.957c0.343,0.686,0.263,1.434-0.205,2.041c-3.918,5.078-5.988,11.117-5.988,17.534
+                                        c0,15.883,12.922,28.785,28.805,28.785l0.369-0.018c0.727-0.01,1.475,0.412,1.817,1.1c0.344,0.687,0.265,1.506-0.205,2.113
+                                        C55.566,60.641,46.094,65.3,35.853,65.3z M31.475,4.034C17.688,6.162,7.048,18.177,7.048,32.496
+                                        C7.048,48.378,19.97,61.3,35.853,61.3c7.643,0,14.795-2.957,20.15-8.226c-16.282-1.911-28.955-15.793-28.955-32.58
+                                        C27.048,14.629,28.568,9.013,31.475,4.034z"/>
+                                </g>
+                                <g>
+                                    <path d="M37.349,58.464c-13.139,0-24.312-9.381-26.567-22.308c-0.095-0.543,0.27-1.063,0.813-1.156
+                                        c0.552-0.094,1.063,0.27,1.157,0.812c2.087,11.967,12.432,20.651,24.597,20.651c0.553,0,1,0.446,1,1S37.902,58.464,37.349,58.464
+                                        z"/>
+                                </g>
+                                <g>
+                                    <path d="M11.416,34c-0.53,0-0.973-0.492-0.998-1.027c-0.022-0.463-0.034-0.97-0.034-1.439c0-0.553,0.447-1.019,1-1.019
+                                        c0.553,0,1,0.438,1,0.991c0,0.438,0.012,0.943,0.032,1.377C12.441,33.436,12.017,34,11.464,34C11.447,34,11.431,34,11.416,34z"/>
+                                </g>
+                                <circle cx="40.41" cy="18.442" r="1.782"/>
+                                <circle cx="51.992" cy="9.888" r="1.782"/>
+                                <circle cx="48.117" cy="25.851" r="1.782"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <h2>Legacy Documentation</h2>
+                    <p>Сборник важной информации о legacy.</p>
+                </div>
+                <a href="legacy/index.html" class="btn btn-primary" style="background: linear-gradient(135deg, rgba(255, 170, 0, 0.8), rgba(255, 85, 0, 0.8));">Открыть документацию →</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Shadow.net | Все права защищены 💜</p>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        });
+
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.opacity = Math.random() * 0.5 + 0.1;
+            particlesContainer.appendChild(particle);
+        }
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
 </html>
