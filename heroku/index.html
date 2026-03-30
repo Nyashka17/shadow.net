@@ -1,20 +1,339 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Heroku Documentation | Shadow.net</title>
-        <link rel="stylesheet" href="index.css"/>
-    </head>
-    <body>
-        <div class="archive-container">
-            <h1 class="archive-title">Heroku Documentation</h1>
-            <p class="archive-subtitle">Сборник важной информации о Heroku</p>
-            <a href="../index.html" class="back-link">← Назад на главную</a>
+<head>
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heroku Documentation | Shadow.net</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00f2ff;
+            --secondary: #ff00ff;
+            --accent: #7700ff;
+            --dark: #0a0a0f;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--dark);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 242, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.6;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        @keyframes float {
+            from { transform: translateY(100vh) translateX(0); }
+            to { transform: translateY(-10vh) translateX(100px); }
+        }
+
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            top: 10%;
+            right: 10%;
+            animation: drift 20s infinite;
+        }
+
+        .orb-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--secondary);
+            bottom: 20%;
+            left: 10%;
+            animation: drift 15s infinite reverse;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-30px, 30px); }
+            50% { transform: translate(20px, -20px); }
+            75% { transform: translate(-20px, -30px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.6s ease;
+            min-height: 380px;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 2rem;
+        }
+
+        .card-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+            transition: transform 0.6s ease;
+            background-image: url('../assets/fon.webp');
+        }
+
+        .card:hover .card-bg {
+            transform: scale(1.1);
+        }
+
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10,10,15,0.7) 0%, rgba(10,10,15,0.85) 50%, rgba(10,10,15,0.9) 100%);
+            z-index: 1;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover .card-overlay {
+            opacity: 0.95;
+            background: linear-gradient(135deg, rgba(10,10,15,0.6) 0%, rgba(10,10,15,0.75) 50%, rgba(10,10,15,0.85) 100%);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 2.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-icon {
+            transform: rotate(-5deg) scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-icon svg {
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, rgba(255,255,255,0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            width: fit-content;
+        }
+
+        .btn:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+            transform: translateX(5px);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.8), rgba(119, 0, 255, 0.8));
+            border: none;
+            box-shadow: 0 4px 20px rgba(0, 242, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 30px rgba(0, 242, 255, 0.5);
+            transform: translateX(5px) scale(1.05);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--accent));
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .card-content { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <div class="container">
+        <div class="card" onclick="window.location.href='../index.html'">
+            <div class="card-bg"></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+                <div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 200 200">
+                            <defs>
+                                <linearGradient id="planetGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffffff" />
+                                    <stop offset="100%" style="stop-color:#e2e8f0" />
+                                </linearGradient>
+                                <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#ffffff" />
+                                    <stop offset="100%" style="stop-color:#e2e8f0" />
+                                </linearGradient>
+                            </defs>
+                            <ellipse class="ring back-ring" cx="100" cy="100" rx="80" ry="20" fill="none" stroke="url(#ringGradient)" stroke-width="2" opacity="0.5" />
+                            <circle class="planet" cx="100" cy="100" r="40" fill="url(#planetGradient)" />
+                            <ellipse class="ring front-ring" cx="100" cy="100" rx="80" ry="20" fill="none" stroke="url(#ringGradient)" stroke-width="2.5" />
+                            <circle cx="140" cy="100" r="3" fill="#ffffff" />
+                            <circle cx="160" cy="100" r="2" fill="#ffffff" />
+                            <circle cx="120" cy="95" r="2" fill="#ffffff" />
+                            <circle cx="180" cy="102" r="1" fill="#ffffff" />
+                        </svg>
+                    </div>
+                    <h2>Heroku Documentation</h2>
+                    <p>Сборник важной информации о Heroku.</p>
+                </div>
+                <a href="../index.html" class="btn btn-primary">← Назад на главную</a>
+            </div>
         </div>
-        
-        <script src="index.js"></script>
-    </body>
+    </div>
+
+    <script>
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.opacity = Math.random() * 0.5 + 0.1;
+            particlesContainer.appendChild(particle);
+        }
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
 </html>

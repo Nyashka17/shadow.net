@@ -1,20 +1,345 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Legacy Documentation | Shadow.net</title>
-        <link rel="stylesheet" href="index.css"/>
-    </head>
-    <body>
-        <div class="archive-container">
-            <h1 class="archive-title">Legacy Documentation</h1>
-            <p class="archive-subtitle">Сборник важной информации о legacy</p>
-            <a href="../index.html" class="back-link">← Назад на главную</a>
+<head>
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacy Documentation | Shadow.net</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00f2ff;
+            --secondary: #ff00ff;
+            --accent: #7700ff;
+            --dark: #0a0a0f;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--dark);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 242, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.6;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        @keyframes float {
+            from { transform: translateY(100vh) translateX(0); }
+            to { transform: translateY(-10vh) translateX(100px); }
+        }
+
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            top: 10%;
+            right: 10%;
+            animation: drift 20s infinite;
+        }
+
+        .orb-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--secondary);
+            bottom: 20%;
+            left: 10%;
+            animation: drift 15s infinite reverse;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-30px, 30px); }
+            50% { transform: translate(20px, -20px); }
+            75% { transform: translate(-20px, -30px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.6s ease;
+            min-height: 380px;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 2rem;
+        }
+
+        .card-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+            transition: transform 0.6s ease;
+            background-image: url('../assets/fon.webp');
+        }
+
+        .card:hover .card-bg {
+            transform: scale(1.1);
+        }
+
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10,10,15,0.7) 0%, rgba(10,10,15,0.85) 50%, rgba(10,10,15,0.9) 100%);
+            z-index: 1;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover .card-overlay {
+            opacity: 0.95;
+            background: linear-gradient(135deg, rgba(10,10,15,0.6) 0%, rgba(10,10,15,0.75) 50%, rgba(10,10,15,0.85) 100%);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 2.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-icon {
+            transform: rotate(-5deg) scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-icon svg {
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, rgba(255,255,255,0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            width: fit-content;
+        }
+
+        .btn:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+            transform: translateX(5px);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, rgba(255, 170, 0, 0.8), rgba(255, 85, 0, 0.8));
+            border: none;
+            box-shadow: 0 4px 20px rgba(255, 170, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 30px rgba(255, 170, 0, 0.5);
+            transform: translateX(5px) scale(1.05);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--accent));
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .card-content { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <div class="container">
+        <div class="card" onclick="window.location.href='../index.html'">
+            <div class="card-bg"></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+                <div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 65.3 65.3" class="moon-crescent" style="fill: #ffffff; filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));">
+                            <g>
+                                <g>
+                                    <path d="M35.853,65.3c-18.089,0-32.805-14.565-32.805-32.655C3.048,14.791,17.573,0,35.427,0c0.01,0,0.018,0,0.025,0
+                                        c0.757,0,1.449,0.278,1.789,0.957c0.343,0.686,0.263,1.434-0.205,2.041c-3.918,5.078-5.988,11.117-5.988,17.534
+                                        c0,15.883,12.922,28.785,28.805,28.785l0.369-0.018c0.727-0.01,1.475,0.412,1.817,1.1c0.344,0.687,0.265,1.506-0.205,2.113
+                                        C55.566,60.641,46.094,65.3,35.853,65.3z M31.475,4.034C17.688,6.162,7.048,18.177,7.048,32.496
+                                        C7.048,48.378,19.97,61.3,35.853,61.3c7.643,0,14.795-2.957,20.15-8.226c-16.282-1.911-28.955-15.793-28.955-32.58
+                                        C27.048,14.629,28.568,9.013,31.475,4.034z"/>
+                                </g>
+                                <g>
+                                    <path d="M37.349,58.464c-13.139,0-24.312-9.381-26.567-22.308c-0.095-0.543,0.27-1.063,0.813-1.156
+                                        c0.552-0.094,1.063,0.27,1.157,0.812c2.087,11.967,12.432,20.651,24.597,20.651c0.553,0,1,0.446,1,1S37.902,58.464,37.349,58.464
+                                        z"/>
+                                </g>
+                                <g>
+                                    <path d="M11.416,34c-0.53,0-0.973-0.492-0.998-1.027c-0.022-0.463-0.034-0.97-0.034-1.439c0-0.553,0.447-1.019,1-1.019
+                                        c0.553,0,1,0.438,1,0.991c0,0.438,0.012,0.943,0.032,1.377C12.441,33.436,12.017,34,11.464,34C11.447,34,11.431,34,11.416,34z"/>
+                                </g>
+                                <circle cx="40.41" cy="18.442" r="1.782"/>
+                                <circle cx="51.992" cy="9.888" r="1.782"/>
+                                <circle cx="48.117" cy="25.851" r="1.782"/>
+                            </g>
+                        </svg>
+
+                    </div>
+                    <h2>Legacy Documentation</h2>
+                    <p>Сборник важной информации о legacy.</p>
+                </div>
+                <a href="../index.html" class="btn btn-primary">← Назад на главную</a>
+            </div>
         </div>
-        
-        <script src="index.js"></script>
-    </body>
+    </div>
+
+    <script>
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.opacity = Math.random() * 0.5 + 0.1;
+            particlesContainer.appendChild(particle);
+        }
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
 </html>
