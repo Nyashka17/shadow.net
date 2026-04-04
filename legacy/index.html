@@ -68,8 +68,8 @@
         }
 
         @keyframes float {
-            from { transform: translateY(100vh) translateX(0); }
-            to { transform: translateY(-10vh) translateX(100px); }
+            from { transform: translateY(150vh) translateX(0); }
+            to { transform: translateY(-50vh) translateX(100px); }
         }
 
         .glow-orb {
@@ -106,6 +106,16 @@
             75% { transform: translate(-20px, -30px); }
         }
 
+        .particle-blocker {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            z-index: 100;
+            background: var(--dark);
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -126,6 +136,7 @@
             width: 100%;
             max-width: 600px;
             margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .card-bg {
@@ -267,6 +278,7 @@
 <body>
     <div class="bg-animation"></div>
     <div class="particles" id="particles"></div>
+    <div class="particle-blocker"></div>
     <div class="glow-orb orb-1"></div>
     <div class="glow-orb orb-2"></div>
 
