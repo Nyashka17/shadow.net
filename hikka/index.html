@@ -311,9 +311,135 @@
             .container { padding: 1rem; }
             .card-content { padding: 1.5rem; }
         }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 1.5rem 0;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.open { transform: translateX(0); }
+        .sidebar-header { padding: 0 1.5rem 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 1rem; }
+        .sidebar-title { font-size: 1.2rem; font-weight: 700; background: linear-gradient(135deg, var(--secondary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .sidebar-section { margin-bottom: 1rem; }
+        .sidebar-section-title { font-size: 0.75rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.4); padding: 0.5rem 1.5rem; letter-spacing: 0.1em; }
+        .sidebar-link { display: block; padding: 0.6rem 1.5rem; color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: all 0.2s; border-left: 2px solid transparent; }
+        .sidebar-link:hover, .sidebar-link.active { color: var(--secondary); background: rgba(255, 0, 255, 0.05); border-left-color: var(--secondary); }
+        .menu-toggle { position: fixed; top: 1rem; left: 1rem; z-index: 1001; width: 44px; height: 44px; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.5rem; }
+        .menu-toggle:hover { background: rgba(255, 0, 255, 0.2); }
+        .main-content { margin-left: 0; padding: 2rem; transition: margin-left 0.3s ease; max-width: 1000px; }
+        .main-content.shifted { margin-left: 280px; }
+        .doc-section { margin-bottom: 3rem; scroll-margin-top: 100px; }
+        .doc-section h2 { font-size: 1.8rem; margin-bottom: 1rem; color: var(--secondary); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 0.5rem; }
+        .doc-section h3 { font-size: 1.3rem; margin: 1.5rem 0 0.8rem; color: #fff; }
+        .doc-section p { color: rgba(255, 255, 255, 0.8); line-height: 1.7; margin-bottom: 1rem; }
+        .doc-section ul { list-style: none; margin-bottom: 1rem; }
+        .doc-section li { padding: 0.4rem 0; color: rgba(255, 255, 255, 0.8); padding-left: 1.5rem; position: relative; }
+        .doc-section li::before { content: '▸'; position: absolute; left: 0; color: var(--secondary); }
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .code-block-header {
+            background: #161b22;
+            padding: 8px 16px;
+            border-bottom: 1px solid #30363d;
+            font-size: 0.75rem;
+            color: #8b949e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: monospace;
+        }
+
+        .code-block-header::before {
+            content: "module.py";
+            background: #1f6feb;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 16px;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'DejaVu Sans Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #c9d1d9;
+            white-space: pre;
+        }
+
+        .code-block pre .comment {
+            color: #8b949e;
+            font-style: italic;
+        }
+
+        .code-block pre .keyword {
+            color: #ff7b72;
+            font-weight: 600;
+        }
+
+        .code-block pre .string {
+            color: #a5d6ff;
+        }
+
+        .code-block pre .function {
+            color: #d2a8ff;
+        }
+
+        .code-block pre .number {
+            color: #79c0ff;
+        }
+
+        .code-block pre .builtin {
+            color: #ffa657;
+        }
+
+        .code-block pre .decorator {
+            color: #d2a8ff;
+        }
+
+        .code-block pre .self {
+            color: #ffa657;
+        }
+
+        .info-box { background: rgba(255, 0, 255, 0.1); border: 1px solid rgba(255, 0, 255, 0.3); border-radius: 12px; padding: 1rem 1.5rem; margin: 1rem 0; }
+        .info-box.warning { background: rgba(255, 170, 0, 0.1); border-color: rgba(255, 170, 0, 0.3); }
+        .info-box.danger { background: rgba(255, 0, 100, 0.1); border-color: rgba(255, 0, 100, 0.3); }
+        .feature-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        .feature-table th, .feature-table td { padding: 0.8rem 1rem; text-align: left; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .feature-table th { background: rgba(255, 0, 255, 0.1); color: var(--secondary); font-weight: 600; }
+        .feature-table td { color: rgba(255, 255, 255, 0.8); }
+        .feature-table tr:hover td { background: rgba(255, 255, 255, 0.03); }
+        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+        .badge-new { background: rgba(255, 0, 255, 0.2); color: var(--secondary); }
+        .badge-deprecated { background: rgba(255, 0, 100, 0.2); color: #ff0064; }
+        .badge-feature { background: rgba(119, 0, 255, 0.2); color: var(--accent); }
+        @media (max-width: 768px) { .sidebar { width: 100%; } .main-content.shifted { margin-left: 0; } }
     </style>
 </head>
 <body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
     <div class="bg-animation"></div>
     <div class="pattern-bg"></div>
     <div class="grid-overlay"></div>
@@ -324,61 +450,427 @@
     <div class="glow-orb orb-2"></div>
     <div class="glow-orb orb-3"></div>
 
-    <div class="container">
-        <div class="card" onclick="window.location.href='../index.html'">
-            <div class="card-bg"></div>
-            <div class="card-overlay"></div>
-            <div class="card-content">
-                <div>
-                    <div class="card-icon">
-                        <svg viewBox="0 0 200 200">
-                            <defs>
-                                <radialGradient id="moonGradient" cx="30%" cy="30%" r="70%">
-                                    <stop offset="0%" style="stop-color:#f8fafc" />
-                                    <stop offset="50%" style="stop-color:#e2e8f0" />
-                                    <stop offset="100%" style="stop-color:#94a3b8" />
-                                </radialGradient>
-                                <radialGradient id="craterGradient" cx="30%" cy="30%" r="70%">
-                                    <stop offset="0%" style="stop-color:#cbd5e1" />
-                                    <stop offset="100%" style="stop-color:#64748b" />
-                                </radialGradient>
-                                <filter id="glow">
-                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                                    <feMerge>
-                                        <feMergeNode in="coloredBlur"/>
-                                        <feMergeNode in="SourceGraphic"/>
-                                    </feMerge>
-                                </filter>
-                            </defs>
-                            <circle cx="100" cy="100" r="50" fill="url(#moonGradient)" filter="url(#glow)" />
-                            <circle cx="85" cy="85" r="8" fill="url(#craterGradient)" opacity="0.6" />
-                            <circle cx="115" cy="95" r="12" fill="url(#craterGradient)" opacity="0.5" />
-                            <circle cx="95" cy="120" r="6" fill="url(#craterGradient)" opacity="0.4" />
-                            <circle cx="125" cy="110" r="5" fill="url(#craterGradient)" opacity="0.5" />
-                            <circle cx="75" cy="105" r="4" fill="url(#craterGradient)" opacity="0.4" />
-                            <circle cx="105" cy="75" r="6" fill="url(#craterGradient)" opacity="0.5" />
-                            <circle cx="130" cy="85" r="3" fill="url(#craterGradient)" opacity="0.4" />
-                        </svg>
-                    </div>
-                    <h2>Hikka Documentation</h2>
-                    <p>Сборник важной информации о Hikka.</p>
-                </div>
-                <a href="../index.html" class="btn btn-primary">← Назад на главную</a>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title">🌙 Hikka Docs</div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Введение</div>
+            <a href="#overview" class="sidebar-link">Обзор проекта</a>
+            <a href="#history" class="sidebar-link">История</a>
+            <a href="#installation" class="sidebar-link">Установка</a>
+            <a href="#requirements" class="sidebar-link">Требования</a>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Основы модулей</div>
+            <a href="#module-structure" class="sidebar-link">Структура модуля</a>
+            <a href="#decorators" class="sidebar-link">Декораторы</a>
+            <a href="#client" class="sidebar-link">Client и API</a>
+            <a href="#events" class="sidebar-link">События</a>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">База данных</div>
+            <a href="#database" class="sidebar-link">Работа с БД</a>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Продвинутое</div>
+            <a href="#advanced-functions" class="sidebar-link">Скрытые функции</a>
+            <a href="#inline" class="sidebar-link">Inline формы</a>
+            <a href="#forms" class="sidebar-link">Кнопки и клавиатуры</a>
+            <a href="#galleries" class="sidebar-link">Галереи</a>
+            <a href="#nonick" class="sidebar-link">NoNick режим</a>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Сравнение</div>
+            <a href="#vs-heroku" class="sidebar-link">vs Heroku</a>
+            <a href="#vs-legacy" class="sidebar-link">vs Legacy</a>
+        </div>
+    </nav>
+
+    <main class="main-content" id="mainContent">
+        <div class="doc-section" id="overview">
+            <h2>📌 Обзор проекта Hikka</h2>
+            <p>Hikka — это оригинальный Telegram userbot, разработанный hikariatama. Это основа для многих форков включая Heroku и Legacy.</p>
+            <div class="info-box danger">
+                <strong>⚠️ Важно:</strong> Hikka архивирован (март 2025). Проект больше не обновляется. Рекомендуется использовать Heroku или Legacy.
             </div>
         </div>
-    </div>
+
+        <div class="doc-section" id="history">
+            <h2>📜 История</h2>
+            <p>Hikka была создана как форк Friendly-Telegram (FTG) от Hackintosh5. Затем на её основе были созданы:</p>
+            <ul>
+                <li><strong>Heroku</strong> — форк от coddrago с улучшениями</li>
+                <li><strong>Legacy</strong> — форк от Crayz310, основанный на Heroku</li>
+            </ul>
+            <p>В марте 2025 года проект был архивирован из-за прекращения разработки.</p>
+        </div>
+
+        <div class="doc-section" id="installation">
+            <h2>⚙️ Установка</h2>
+            <h3>Автоматическая установка (рекомендуется)</h3>
+            <div class="code-block">
+<span class="comment"># Linux/VPS</span>
+. <(wget -qO- https://hikariatama.ru/get_hikka)
+            </div>
+            <h3>Ручная установка</h3>
+            <div class="code-block">
+<span class="comment"># Ubuntu/Debian</span>
+apt update && apt install git libcairo2 -y
+git clone https://github.com/hikariatama/Hikka
+cd Hikka
+pip install -r requirements.txt
+python3 -m hikka
+            </div>
+            <div class="info-box">
+                <strong>💡 Примечание:</strong> На VPS добавьте `--proxy-pass` для веб-интерфейса или `--no-web` для консольной установки.
+            </div>
+        </div>
+
+        <div class="doc-section" id="requirements">
+            <h2>📋 Требования</h2>
+            <ul>
+                <li><strong>Python:</strong> 3.8+</li>
+                <li><strong>Библиотеки:</strong> libcairo2</li>
+                <li><strong>API:</strong> API_ID и API_HASH с my.telegram.org</li>
+            </ul>
+        </div>
+
+        <div class="doc-section" id="module-structure">
+            <h2>📦 Структура модуля</h2>
+            <p>Модули Hikka располагаются в папке <code>hikka/modules/</code>.</p>
+            <div class="code-block">
+<span class="comment"># hikka/modules/my_module.py</span>
+
+<span class="keyword">import</span> asyncio
+<span class="keyword">from</span> ..<span class="keyword">import</span> <span class="string">loader, utils</span>
+
+<span class="keyword">@</span>loader.<span class="function">owner</span>
+<span class="keyword">class</span> <span class="function">MyModule</span>(loader.<span class="function">Module</span>):
+    <span class="string">"""Мой первый модуль"""</span>
+    
+    <span class="keyword">strings</span> = {
+        <span class="string">"name"</span>: <span class="string">"MyModule"</span>,
+        <span class="string">"hello"</span>: <span class="string">"Привет от модуля!"</span>
+    }
+    
+    <span class="keyword">async def</span> <span class="function">client_ready</span>(self):
+        <span class="string">"""Вызывается при загрузке модуля"""</span>
+        <span class="function">print</span>(<span class="string">"Модуль загружен!"</span>)
+    
+    <span class="keyword">@</span>loader.<span class="function">command</span>()
+    <span class="keyword">async def</span> <span class="function">hello</span>(self, message):
+        <span class="keyword">await</span> utils.<span class="function">answer</span>(message, self.<span class="function">strings</span>[<span class="string">"hello"</span>])
+            </div>
+        </div>
+
+        <div class="doc-section" id="decorators">
+            <h2>🏷️ Декораторы</h2>
+            <table class="feature-table">
+                <thead>
+                    <tr>
+                        <th>Декоратор</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>@loader.owner</code></td>
+                        <td>Только владелец</td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.admin</code></td>
+                        <td>Администраторы</td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.command()</code></td>
+                        <td>Команда с префиксом .</td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.inline()</code></td>
+                        <td>Inline команда</td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.loop()</code></td>
+                        <td>Циклическая задача</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="doc-section" id="client">
+            <h2>🔌 Client и API</h2>
+            <div class="code-block">
+<span class="comment"># Основные методы</span>
+me = <span class="keyword">await</span> self.<span class="function">client</span>.<span class="function">get_me</span>()
+<span class="keyword">await</span> self.<span class="function">client</span>.<span class="function">send_message</span>(<span class="string">"chat"</span>, <span class="string">"text"</span>)
+<span class="keyword">await</span> self.<span class="function">client</span>.<span class="function">send_file</span>(<span class="string">"chat"</span>, <span class="string">"file"</span>)
+messages = <span class="keyword">await</span> self.<span class="function">client</span>.<span class="function">get_messages</span>(<span class="string">"chat"</span>, <span class="number">limit</span>=10)
+chat = <span class="keyword">await</span> self.<span class="function">client</span>.<span class="function">get_entity</span>(<span class="string">"username"</span>)
+            </div>
+        </div>
+
+        <div class="doc-section" id="events">
+            <h2>⚡ События</h2>
+            <div class="code-block">
+<span class="keyword">from</span> telethon <span class="keyword">import</span> events
+
+<span class="comment"># Новые сообщения</span>
+<span class="keyword">@</span>self.<span class="function">client</span>.<span class="function">on</span>(events.NewMessage(<span class="function">pattern</span>=<span class="string">"тест"</span>))
+<span class="keyword">async def</span> <span class="function">handler</span>(event):
+    <span class="keyword">await</span> event.<span class="function">respond</span>(<span class="string">"Работает!"</span>)
+
+<span class="comment"># Редактирование</span>
+<span class="keyword">@</span>self.<span class="function">client</span>.<span class="function">on</span>(events.MessageEdited())
+<span class="keyword">async def</span> <span class="function">edit_handler</span>(event):
+    <span class="function">print</span>(<span class="string">"Сообщение отредактировано"</span>)
+
+<span class="comment"># Удаление</span>
+<span class="keyword">@</span>self.<span class="function">client</span>.<span class="function">on</span>(events.MessageDeleted())
+<span class="keyword">async def</span> <span class="function">del_handler</span>(event):
+    <span class="function">print</span>(<span class="string">f"Удалено: {len(event.messages)}"</span>)
+            </div>
+        </div>
+
+        <div class="doc-section" id="database">
+            <h2>💾 База данных</h2>
+            <div class="code-block">
+<span class="comment"># Сохранение и получение</span>
+<span class="keyword">await</span> self.<span class="function">db</span>.<span class="function">put</span>(<span class="string">"key"</span>, <span class="string">"value"</span>)
+value = <span class="keyword">await</span> self.<span class="function">db</span>.<span class="function">get</span>(<span class="string">"key"</span>)
+<span class="keyword">await</span> self.<span class="function">db</span>.<span class="function">remove</span>(<span class="string">"key"</span>)
+
+<span class="comment"># Сложные данные</span>
+<span class="keyword">await</span> self.<span class="function">db</span>.<span class="function">put</span>(<span class="string">"users"</span>, [<span class="string">{"id"</span>: <span class="number">1</span>, <span class="string">"name"</span>: <span class="string">"A"}</span>])
+users = <span class="keyword">await</span> self.<span class="function">db</span>.<span class="function">get</span>(<span class="string">"users"</span>)
+            </div>
+        </div>
+
+        <div class="doc-section" id="inline">
+            <h2>🔘 Inline формы</h2>
+            <div class="code-block">
+<span class="comment"># Ответ с кнопками</span>
+<span class="keyword">await</span> self.<span class="function">inline</span>.<span class="function">answer</span>(
+    <span class="string">"Заголовок"</span>,
+    <span class="string">"Текст"</span>,
+    <span class="function">buttons</span>=[[{ <span class="string">"text"</span>: <span class="string">"Кнопка"</span>, <span class="string">"callback"</span>: <span class="function">handler</span> }]]
+)
+            </div>
+        </div>
+
+        <div class="doc-section" id="forms">
+            <h2>⌨️ Кнопки и клавиатуры</h2>
+            <div class="code-block">
+<span class="keyword">from</span> telethon.tl <span class="keyword">import</span> types
+
+<span class="comment"># Клавиатура</span>
+keyboard = [
+    [<span class="function">types.KeyboardButtonUrl</span>(<span class="string">"Сайт"</span>, <span class="string">"url"</span>)],
+    [<span class="function">types.KeyboardButtonCallback</span>(<span class="string">"Кнопка"</span>, <span class="string">"data"</span>)]
+]
+            </div>
+        </div>
+
+        <div class="doc-section" id="galleries">
+            <h2>🖼️ Галереи</h2>
+            <div class="code-block">
+<span class="comment"># Создание галереи</span>
+<span class="keyword">await</span> self.<span class="function">gallery</span>.<span class="function">create</span>(<span class="string">"album"</span>, photos)
+<span class="keyword">await</span> self.<span class="function">gallery</span>.<span class="function">show</span>(<span class="string">"album"</span>, <span class="string">"chat"</span>)
+            </div>
+        </div>
+
+        <div class="doc-section" id="advanced-functions">
+            <h2>⚡ Скрытые функции из исходного кода</h2>
+            <p>Скрытые функции из исходного кода Hikka. Эти функции не документированы в официальном вики.</p>
+            
+            <h3>📌 get_prefix() - Получение префикса</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">TestModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"TestModule"</span>}
+
+    <span class="keyword">async def</span> <span class="function">client_ready</span>(<span class="self">self</span>):
+        <span class="function">prefix</span> = <span class="self">self</span>.<span class="function">get_prefix</span>()
+        <span class="function">prefixes</span> = <span class="self">self</span>.<span class="function">get_prefixes</span>()
+</pre>
+            </div>
+
+            <h3>📊 pointer() - Указатели на данные</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">DataModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"DataModule"</span>}
+
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="self">self</span>):
+        <span class="self">self</span>.<span class="function">data</span> = <span class="self">self</span>.<span class="function">pointer</span>(<span class="string">"key"</span>, [])
+
+    <span class="keyword">async def</span> <span class="function">add_item</span>(<span class="self">self</span>, item):
+        <span class="self">self</span>.<span class="function">data</span>.<span class="function">append</span>(item)
+</pre>
+            </div>
+
+            <h3>🔍 lookup() - Поиск модулей</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">LookupModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"LookupModule"</span>}
+
+    <span class="keyword">async def</span> <span class="function">client_ready</span>(<span class="self">self</span>):
+        <span class="function">mod</span> = <span class="self">self</span>.<span class="function">lookup</span>(<span class="string">"Help"</span>)
+</pre>
+            </div>
+
+            <h3>🎯 invoke() - Вызов команд</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">InvokeModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"InvokeModule"</span>}
+
+    <span class="keyword">async def</span> <span class="function">call_cmd</span>(<span class="self">self</span>, message):
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">invoke</span>(<span class="string">"cmd"</span>, <span class="string">"args"</span>, peer=chat)
+</pre>
+            </div>
+
+            <h3>📥 import_lib() - Импорт библиотек</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">LibModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"LibModule"</span>}
+
+    <span class="keyword">async def</span> <span class="function">client_ready</span>(<span class="self">self</span>):
+        <span class="function">lib</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">import_lib</span>(<span class="string">"url"</span>)
+</pre>
+            </div>
+
+            <h3>🔄 request_join() - Запрос вступления</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">JoinModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"JoinModule"</span>}
+
+    <span class="keyword">async def</span> <span class="function">client_ready</span>(<span class="self">self</span>):
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">request_join</span>(<span class="string">"channel"</span>, <span class="string">"reason"</span>)
+</pre>
+            </div>
+
+            <h3>💬 create_channel() - Создание чатов</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">ChatModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"ChatModule"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">create_cmd</span>(<span class="self">self</span>, message):
+        <span class="function">chat</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">create_channel</span>(
+            <span class="string">"Title"</span>, <span class="string">"About"</span>, <span class="keyword">True</span>
+        )
+</pre>
+            </div>
+
+            <h3>⭐ send_reaction() - Реакции</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">ReactModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"ReactModule"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">react_cmd</span>(<span class="self">self</span>, message):
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">send_reaction</span>(
+            message.<span class="function">chat_id</span>, message.<span class="function">id</span>, <span class="string">"🔥"</span>
+        )
+</pre>
+            </div>
+        </div>
+
+        <div class="doc-section" id="nonick">
+            <h2>👤 NoNick режим</h2>
+            <p>Позволяет использовать бота с другого аккаунта без изменения имени.</p>
+            <div class="code-block">
+<span class="comment"># Доступные команды</span>
+.<span class="function">nonick</span>      <span class="comment"># Показать статус</span>
+.<span class="function">nonick on</span>   <span class="comment"># Включить</span>
+.<span class="function">nonick off</span>  <span class="comment"># Выключить</span>
+            </div>
+        </div>
+
+        <div class="doc-section" id="vs-heroku">
+            <h2>🔄 Hikka vs Heroku</h2>
+            <table class="feature-table">
+                <thead>
+                    <tr><th>Параметр</th><th>Hikka</th><th>Heroku</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Статус</td><td><span class="badge badge-deprecated">Архив</span></td><td><span class="badge badge-new">Активный</span></td></tr>
+                    <tr><td>Обновления</td><td>Нет</td><td>Да</td></tr>
+                    <tr><td>Безопасность</td><td>Базовая</td><td>Улучшенная</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="doc-section" id="vs-legacy">
+            <h2>🔄 Hikka vs Legacy</h2>
+            <table class="feature-table">
+                <thead>
+                    <tr><th>Параметр</th><th>Hikka</th><th>Legacy</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Статус</td><td><span class="badge badge-deprecated">Архив</span></td><td><span class="badge badge-new">Активный</span></td></tr>
+                    <tr><td>Основа</td><td>FTG</td><td>Heroku</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="text-align: center; padding: 2rem;">
+            <a href="../index.html" class="btn btn-primary" style="background: linear-gradient(135deg, rgba(255, 0, 255, 0.8), rgba(119, 0, 255, 0.8));">← Назад на главную</a>
+        </div>
+    </main>
 
     <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('mainContent').classList.toggle('shifted');
+        }
+
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+                if (window.innerWidth < 768) {
+                    toggleSidebar();
+                }
+            });
+        });
+
         const particlesContainer = document.getElementById('particles');
         const colors = ['var(--primary)', 'var(--secondary)', 'var(--accent)', '#ffffff'];
         
         for (let i = 0; i < 60; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
-            
             const color = colors[Math.floor(Math.random() * colors.length)];
             const size = Math.random() * 3 + 2;
-            
             particle.style.left = Math.random() * 100 + '%';
             particle.style.width = size + 'px';
             particle.style.height = size + 'px';
@@ -389,24 +881,6 @@
             particle.style.opacity = Math.random() * 0.6 + 0.3;
             particlesContainer.appendChild(particle);
         }
-
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 20;
-                const rotateY = (centerX - x) / 20;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
-            });
-        });
     </script>
 </body>
 </html>

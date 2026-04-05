@@ -339,9 +339,472 @@
             .container { padding: 1rem; }
             .card-content { padding: 1.5rem; }
         }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 1.5rem 0;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar-header {
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            padding: 0.5rem 1.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 0.6rem 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border-left: 2px solid transparent;
+        }
+
+        .sidebar-link:hover, .sidebar-link.active {
+            color: var(--primary);
+            background: rgba(0, 242, 255, 0.05);
+            border-left-color: var(--primary);
+        }
+
+        .menu-toggle {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            width: 44px;
+            height: 44px;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(0, 242, 255, 0.2);
+        }
+
+        .main-content {
+            margin-left: 0;
+            padding: 2rem;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.shifted {
+            margin-left: 280px;
+        }
+
+        .doc-section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 100px;
+        }
+
+        .doc-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .doc-section h3 {
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.8rem;
+            color: #fff;
+        }
+
+        .doc-section p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .doc-section ul {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .doc-section li {
+            padding: 0.4rem 0;
+            color: rgba(255, 255, 255, 0.8);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .doc-section li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+.code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .code-block-header {
+            background: #161b22;
+            padding: 8px 16px;
+            border-bottom: 1px solid #30363d;
+            font-size: 0.75rem;
+            color: #8b949e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: monospace;
+        }
+
+        .code-block-header::before {
+            content: "module.py";
+            background: #1f6feb;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 16px;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'DejaVu Sans Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #c9d1d9;
+            white-space: pre;
+        }
+
+        .code-block pre .comment {
+            color: #8b949e;
+            font-style: italic;
+        }
+
+        .code-block pre .keyword {
+            color: #ff7b72;
+            font-weight: 600;
+        }
+
+        .code-block pre .string {
+            color: #a5d6ff;
+        }
+
+        .code-block pre .function {
+            color: #d2a8ff;
+        }
+
+        .code-block pre .number {
+            color: #79c0ff;
+        }
+
+        .code-block pre .builtin {
+            color: #ffa657;
+        }
+
+        .code-block pre .decorator {
+            color: #d2a8ff;
+        }
+
+        .code-block pre .self {
+            color: #ffa657;
+        }
+
+        .code-block pre .operator {
+            color: #ff7b72;
+        }
+
+        .code-block pre .bracket {
+            color: #8b949e;
+        }
+
+        .code-block pre .dot {
+            color: #79c0ff;
+        }
+
+        .code-block pre .attr {
+            color: #79c0ff;
+        }
+
+        .code-block pre .module {
+            color: #8b949e;
+        }
+
+        .code-example {
+            margin: 8px 0;
+        }
+
+        .info-box {
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 12px 0;
+            font-size: 0.9rem;
+        }
+
+        .info-box code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .info-box.warning {
+            background: rgba(255, 170, 0, 0.1);
+            border-color: rgba(255, 170, 0, 0.3);
+        }
+
+        .info-box.danger {
+            background: rgba(255, 0, 100, 0.1);
+            border-color: rgba(255, 0, 100, 0.3);
+        }
+
+        .feature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .feature-table th, .feature-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border: 1px solid #30363d;
+        }
+
+        .feature-table th {
+            background: #161b22;
+            color: #58a6ff;
+            font-weight: 600;
+        }
+
+        .feature-table td {
+            color: #c9d1d9;
+        }
+
+        .feature-table tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .code-block-header {
+            background: #161b22;
+            padding: 8px 16px;
+            border-bottom: 1px solid #30363d;
+            font-size: 0.75rem;
+            color: #8b949e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-block-header::before {
+            content: "python";
+            background: #238636;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 16px;
+            overflow-x: auto;
+            color: #c9d1d9;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .code-content {
+            padding: 16px;
+            overflow-x: auto;
+            max-height: 500px;
+        }
+
+        .code-line {
+            display: block;
+            padding: 2px 0;
+            line-height: 1.8;
+        }
+
+        .code-line-num {
+            display: inline-block;
+            width: 30px;
+            color: #484f58;
+            text-align: right;
+            margin-right: 16px;
+            user-select: none;
+        }
+
+        .code-content .comment {
+            color: #8b949e;
+            font-style: italic;
+        }
+
+        .code-content .keyword {
+            color: #ff7b72;
+            font-weight: 600;
+        }
+
+        .code-content .string {
+            color: #a5d6ff;
+        }
+
+        .code-content .function {
+            color: #d2a8ff;
+        }
+
+        .code-content .number {
+            color: #79c0ff;
+        }
+
+        .code-content .builtin {
+            color: #ffa657;
+        }
+
+        .code-content .decorator {
+            color: #d2a8ff;
+        }
+
+        .code-content .self {
+            color: #ffa657;
+        }
+
+        .code-content .operator {
+            color: #ff7b72;
+        }
+
+        .code-content .bracket {
+            color: #8b949e;
+        }
+
+        .info-box {
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .info-box.warning {
+            background: rgba(255, 170, 0, 0.1);
+            border-color: rgba(255, 170, 0, 0.3);
+        }
+
+        .info-box.danger {
+            background: rgba(255, 0, 100, 0.1);
+            border-color: rgba(255, 0, 100, 0.3);
+        }
+
+        .feature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .feature-table th, .feature-table td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-table th {
+            background: rgba(0, 242, 255, 0.1);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .feature-table td {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .feature-table tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-new {
+            background: rgba(0, 242, 255, 0.2);
+            color: var(--primary);
+        }
+
+        .badge-deprecated {
+            background: rgba(255, 0, 100, 0.2);
+            color: #ff0064;
+        }
+
+        .badge-feature {
+            background: rgba(119, 0, 255, 0.2);
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+            }
+            .main-content.shifted {
+                margin-left: 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
     <div class="bg-animation"></div>
     <div class="pattern-bg"></div>
     <div class="grid-overlay"></div>
@@ -352,42 +815,2191 @@
     <div class="glow-orb orb-2"></div>
     <div class="glow-orb orb-3"></div>
 
-    <div class="container">
-        <div class="card" onclick="window.location.href='../index.html'">
-            <div class="card-bg"></div>
-            <div class="card-overlay"></div>
-            <div class="card-content">
-                <div>
-                    <div class="card-icon">
-                        <svg viewBox="0 0 200 200">
-                            <defs>
-                                <linearGradient id="planetGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#ffffff" />
-                                    <stop offset="100%" style="stop-color:#e2e8f0" />
-                                </linearGradient>
-                                <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#ffffff" />
-                                    <stop offset="100%" style="stop-color:#e2e8f0" />
-                                </linearGradient>
-                            </defs>
-                            <ellipse class="ring back-ring" cx="100" cy="100" rx="80" ry="20" fill="none" stroke="url(#ringGradient)" stroke-width="2" opacity="0.5" />
-                            <circle class="planet" cx="100" cy="100" r="40" fill="url(#planetGradient)" />
-                            <ellipse class="ring front-ring" cx="100" cy="100" rx="80" ry="20" fill="none" stroke="url(#ringGradient)" stroke-width="2.5" />
-                            <circle cx="140" cy="100" r="3" fill="#ffffff" />
-                            <circle cx="160" cy="100" r="2" fill="#ffffff" />
-                            <circle cx="120" cy="95" r="2" fill="#ffffff" />
-                            <circle cx="180" cy="102" r="1" fill="#ffffff" />
-                        </svg>
-                    </div>
-                    <h2>Heroku Documentation</h2>
-                    <p>Сборник важной информации о Heroku.</p>
-                </div>
-                <a href="../index.html" class="btn btn-primary">← Назад на главную</a>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title">📚 Heroku Docs</div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Введение</div>
+            <a href="#overview" class="sidebar-link">Обзор проекта</a>
+            <a href="#installation" class="sidebar-link">Установка</a>
+            <a href="#requirements" class="sidebar-link">Требования</a>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Основы модулей</div>
+            <a href="#module-structure" class="sidebar-link">Структура модуля</a>
+            <a href="#decorators" class="sidebar-link">Декораторы и права</a>
+            <a href="#utils" class="sidebar-link">Utils - утилиты</a>
+            <a href="#client" class="sidebar-link">Client и API</a>
+            <a href="#events" class="sidebar-link">События</a>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">База данных</div>
+            <a href="#database" class="sidebar-link">Работа с БД</a>
+            <a href="#redis" class="sidebar-link">Redis</a>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Продвинутое</div>
+            <a href="#advanced-functions" class="sidebar-link">Скрытые функции</a>
+            <a href="#chat-creation" class="sidebar-link">Создание чатов</a>
+            <a href="#langpacks" class="sidebar-link">Языковые пакеты</a>
+            <a href="#premium-emoji" class="sidebar-link">Premium и эмодзи</a>
+            <a href="#advanced-inline" class="sidebar-link">Продвинутый Inline</a>
+            <a href="#inline" class="sidebar-link">Inline формы и кнопки</a>
+            <a href="#galleries" class="sidebar-link">Галереи и списки</a>
+            <a href="#security" class="sidebar-link">Безопасность</a>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Сравнение</div>
+            <a href="#vs-hikka" class="sidebar-link">vs Hikka</a>
+            <a href="#vs-legacy" class="sidebar-link">vs Legacy</a>
+        </div>
+    </nav>
+
+    <main class="main-content" id="mainContent">
+        <div class="doc-section" id="overview">
+            <h2>📌 Обзор проекта Heroku</h2>
+            <p>Heroku — это продвинутый Telegram userbot с улучшенной безопасностью и современными функциями. Основан на Hikka, но имеет дополнительные улучшения и исправления.</p>
+            <div class="info-box">
+                <strong>💡 Важно:</strong> Этот проект является форком Hikka от coddrago с дополнительными патчами и улучшениями.
             </div>
         </div>
-    </div>
+
+        <div class="doc-section" id="installation">
+            <h2>⚙️ Установка</h2>
+            <h3>VPS/VDS (Ubuntu/Debian)</h3>
+            <div class="code-block">
+<span class="comment"># Обновление и установка зависимостей</span>
+<span class="keyword">sudo</span> apt update && <span class="keyword">sudo</span> apt install git python3 -y
+
+<span class="comment"># Клонирование репозитория</span>
+git clone https://github.com/coddrago/Heroku
+cd Heroku
+
+<span class="comment"># Создание виртуального окружения</span>
+python3 -m venv .venv
+<span class="keyword">source</span> .venv/bin/activate
+
+<span class="comment"># Установка зависимостей</span>
+pip install -r requirements.txt
+
+<span class="comment"># Запуск</span>
+python3 -m heroku
+            </div>
+            <h3>Аргументы запуска</h3>
+            <ul>
+                <li><code>--proxy-pass</code> — открыть SSH туннель для веб-интерфейса</li>
+                <li><code>--no-web</code> — установить без веб-интерфейса (консоль)</li>
+                <li><code>--root</code> — для пользователей root</li>
+            </ul>
+        </div>
+
+        <div class="doc-section" id="requirements">
+            <h2>📋 Требования</h2>
+            <ul>
+                <li><strong>Python:</strong> 3.10+</li>
+                <li><strong>API:</strong> API_ID и API_HASH с my.telegram.org</li>
+                <li><strong>ОС:</strong> Linux, WSL, Android (UserLAnd)</li>
+            </ul>
+        </div>
+
+        <div class="doc-section" id="module-structure">
+            <h2>📦 Структура модуля</h2>
+            <p>Модули в Heroku располагаются в папке <code>heroku/modules/</code>. Каждый модуль — это Python файл с определенной структурой.</p>
+            <div class="code-block">
+<span class="comment"># heroku/modules/example.py</span>
+<span class="comment"># -*- coding: utf-8 -*-</span>
+
+<span class="keyword">import</span> asyncio
+<span class="keyword">import</span> logging
+<span class="keyword">from</span> ..<span class="keyword">import</span> <span class="string">loader, utils</span>
+
+<span class="keyword">logger</span> = logging.<span class="function">getLogger</span>(__name__)
+
+<span class="keyword">@</span>loader.<span class="function">tds</span>
+<span class="keyword">@</span>loader.<span class="function">owner</span>
+<span class="keyword">class</span> <span class="function">ExampleModule</span>(loader.<span class="function">Module</span>):
+    <span class="string">"""Пример модуля с документацией"""</span>
+    
+    <span class="keyword">strings</span> = {
+        <span class="string">"name"</span>: <span class="string">"ExampleModule"</span>,
+        <span class="string">"hello"</span>: <span class="string">"Привет! Это пример модуля."</span>,
+        <span class="string">"help"</span>: <span class="string">"Использование: .example [команда]"</span>,
+        <span class="string">"_cmd_doc_example"</span>: <span class="string">"Основная команда модуля"</span>
+    }
+    
+    <span class="keyword">strings_ru</span> = {
+        <span class="string">"hello"</span>: <span class="string">"Привет! Это пример модуля."</span>
+    }
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(self):
+        <span class="function">self</span>.<span class="function">config</span> = loader.<span class="function">ConfigAttribute</span>(self.<span class="function">__class__</span>.<span class="function">__name__</span>)
+    
+    <span class="keyword">async def</span> <span class="function">client_ready</span>(self):
+        <span class="string">"""Вызывается при готовности клиента"""</span>
+        <span class="function">logger</span>.<span class="function">info</span>(<span class="string">"ExampleModule загружен"</span>)
+        <span class="keyword">await</span> self.<span class="function">inline</span>.<span class="function">answer</span>(
+            <span class="string">"Бот готов!"</span>,
+            <span class="string">"<b>ExampleModule загружен</b>"</span>
+        )
+    
+    <span class="keyword">async def</span> <span class="function">on_dlmod</span>(self, client, db):
+        <span class="string">"""Вызывается при установке модуля"""</span>
+        <span class="function">logger</span>.<span class="function">info</span>(<span class="string">"Модуль установлен"</span>)
+    
+    <span class="keyword">async def</span> <span class="function">on_unload</span>(self):
+        <span class="string">"""Вызывается при выгрузке модуля"""</span>
+        <span class="function">logger</span>.<span class="function">info</span>(<span class="string">"Модуль выгружен"</span>)
+    
+    <span class="keyword">@</span>loader.<span class="function">command</span>()
+    <span class="keyword">async def</span> <span class="function">example_cmd</span>(self, message: <span class="function">Message</span>):
+        <span class="string">"""Команда .example"""</span>
+        <span class="keyword">await</span> utils.<span class="function">answer</span>(
+            message,
+            self.<span class="function">strings</span>[<span class="string">"hello"</span>]
+        )
+            </div>
+        </div>
+
+        <div class="doc-section" id="decorators">
+            <h2>🏷️ Декораторы</h2>
+            <p>Heroku предоставляет различные декораторы для управления доступом и функциональностью команд.</p>
+            <h3>Права доступа</h3>
+            <table class="feature-table">
+                <thead>
+                    <tr>
+                        <th>Декоратор</th>
+                        <th>Описание</th>
+                        <th>Доступ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>@loader.owner</code></td>
+                        <td>Только владелец бота</td>
+                        <td><span class="badge badge-feature">Владелец</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.sudo</code></td>
+                        <td>Супер-пользователи</td>
+                        <td><span class="badge badge-feature">Sudo</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.support</code></td>
+                        <td>Пользователи поддержки</td>
+                        <td><span class="badge badge-feature">Support</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.admin</code></td>
+                        <td>Администраторы бота</td>
+                        <td><span class="badge badge-feature">Админ</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.unrestricted</code></td>
+                        <td>Все пользователи</td>
+                        <td>Все</td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.pm</code></td>
+                        <td>Только в личных сообщениях</td>
+                        <td>PM</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Групповые права (для чатов)</h3>
+            <table class="feature-table">
+                <thead>
+                    <tr>
+                        <th>Декоратор</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>@loader.group_owner</code></td><td>Владелец чата</td></tr>
+                    <tr><td><code>@loader.group_admin</code></td><td>Админ чата</td></tr>
+                    <tr><td><code>@loader.group_admin_invite_users</code></td><td>Может приглашать</td></tr>
+                    <tr><td><code>@loader.group_admin_ban_users</code></td><td>Может банить</td></tr>
+                    <tr><td><code>@loader.group_admin_delete_messages</code></td><td>Может удалять</td></tr>
+                    <tr><td><code>@loader.group_admin_pin_messages</code></td><td>Может закреплять</td></tr>
+                    <tr><td><code>@loader.group_member</code></td><td>Любой участник</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Типы команд</h3>
+            <table class="feature-table">
+                <thead>
+                    <tr>
+                        <th>Декоратор</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>@loader.command()</code></td>
+                        <td>Команда бота (префикс .)</td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.command("name")</code></td>
+                        <td>Команда с кастомным именем</td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.inline_handler()</code></td>
+                        <td>Inline обработчик (@bot ...)</td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.callback_handler()</code></td>
+                        <td>Обработчик callback кнопок</td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.watcher()</code></td>
+                        <td>Отслеживание всех сообщений</td>
+                    </tr>
+                    <tr>
+                        <td><code>@loader.loop(interval=5)</code></td>
+                        <td>Запускает цикл с интервалом</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Фильтры команд</h3>
+            <div class="code-block">
+<span class="comment"># Фильтры для команд и watcher'ов</span>
+
+<span class="comment"># Только исходящие сообщения</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">out</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">out_cmd</span>(self, message):
+    <span class="string">"""Сработает только на исходящие"""</span>
+
+<span class="comment"># Только входящие сообщения</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">in</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">in_cmd</span>(self, message):
+    <span class="string">"""Сработает только на входящие"""</span>
+
+<span class="comment"># Только личные сообщения</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">only_pm</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">pm_cmd</span>(self, message):
+    <span class="string">"""Сработает только в PM"""</span>
+
+<span class="comment"># Только группы</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">only_groups</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">group_cmd</span>(self, message):
+    <span class="string">"""Сработает только в чатах"""</span>
+
+<span class="comment"># Только каналы</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">only_channels</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">channel_cmd</span>(self, message):
+    <span class="string">"""Сработает только в каналах"""</span>
+
+<span class="comment"># Только с медиа</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">only_media</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">media_cmd</span>(self, message):
+    <span class="string">"""Сработает только на сообщения с медиа"""</span>
+
+<span class="comment"># Только фото</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">only_photos</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">photo_cmd</span>(self, message):
+    <span class="string">"""Сработает только на фото"""</span>
+
+<span class="comment"># Только видео</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">only_videos</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">video_cmd</span>(self, message):
+    <span class="string">"""Сработает только на видео"""</span>
+
+<span class="comment"># Только стикеры</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">only_stickers</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">sticker_cmd</span>(self, message):
+    <span class="string">"""Сработает только на стикеры"""</span>
+
+<span class="comment"># Только документы</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">only_docs</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">doc_cmd</span>(self, message):
+    <span class="string">"""Сработает только на документы"""</span>
+
+<span class="comment"># Текст начинается с...</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">startswith</span>=<span class="string">"привет"</span>)
+<span class="keyword">async def</span> <span class="function">start_cmd</span>(self, message):
+    <span class="string">"""Сработает если текст начинается с 'привет'"""</span>
+
+<span class="comment"># Текст содержит...</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">contains</span>=<span class="string">"тест"</span>)
+<span class="keyword">async def</span> <span class="function">contain_cmd</span>(self, message):
+    <span class="string">"""Сработает если текст содержит 'тест'"""</span>
+
+<span class="comment"># Регулярное выражение</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">regex</span>=<span class="string">r"\d+"</span>)
+<span class="keyword">async def</span> <span class="function">regex_cmd</span>(self, message):
+    <span class="string">"""Сработает если есть цифры"""</span>
+
+<span class="comment"># Только от конкретного пользователя</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">from_id</span>=123456789)
+<span class="keyword">async def</span> <span class="function">user_cmd</span>(self, message):
+    <span class="string">"""Сработает только от пользователя с ID 123456789"""</span>
+
+<span class="comment"># Только из конкретного чата</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">chat_id</span>=-1001234567890)
+<span class="keyword">async def</span> <span class="function">chat_cmd</span>(self, message):
+    <span class="string">"""Сработает только из чата с указанным ID"""</span>
+
+<span class="comment"># Только команды бота (игнорировать другие)</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">only_commands</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">bot_cmd</span>(self, message):
+    <span class="string">"""Сработает только на команды юзербота"""</span>
+
+<span class="comment"># Игнорировать команды бота</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="function">no_commands</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">no_cmd</span>(self, message):
+    <span class="string">"""Сработает на все сообщения кроме команд"""</span>
+            </div>
+
+            <h3>Циклы (Loops)</h3>
+            <div class="code-block">
+<span class="comment"># Простой цикл - запускается автоматически</span>
+<span class="keyword">@</span>loader.<span class="function">loop</span>(<span class="function">interval</span>=60, <span class="function">autostart</span>=<span class="keyword">True</span>)
+<span class="keyword">async def</span> <span class="function">my_loop</span>(self):
+    <span class="string">"""Выполняется каждые 60 секунд"""</span>
+    <span class="function">logger</span>.<span class="function">info</span>(<span class="string">"Цикл работает!"</span>)
+
+<span class="comment"># Цикл с управлением через БД</span>
+<span class="keyword">@</span>loader.<span class="function">loop</span>(
+    <span class="function">interval</span>=30,
+    <span class="function">autostart</span>=<span class="keyword">False</span>,
+    <span class="function">stop_clause</span>=<span class="string">"my_loop_active"</span>
+)
+<span class="keyword">async def</span> <span class="function">controlled_loop</span>(self):
+    <span class="string">"""Управляется через БД: db.set('my_loop_active', True/False)"""</span>
+    <span class="function">logger</span>.<span class="function">info</span>(<span class="string">"Контролируемый цикл"</span>)
+
+<span class="comment"># Включение цикла вручную</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>()
+<span class="keyword">async def</span> <span class="function">start_loop_cmd</span>(self, message):
+    <span class="string">"""Включить цикл"""</span>
+    self.<span class="function">my_loop</span>.<span class="function">status</span> = <span class="keyword">True</span>
+    <span class="keyword">await</span> utils.<span class="function">answer</span>(message, <span class="string">"Цикл включен!"</span>)
+            </div>
+
+            <h3>Переводы команд</h3>
+            <div class="code-block">
+<span class="comment"># Динамический перевод команд</span>
+<span class="keyword">@</span>loader.<span class="function">tds</span>
+<span class="keyword">class</span> <span class="function">TranslatedModule</span>(loader.<span class="function">Module</span>):
+    <span class="keyword">strings</span> = {
+        <span class="string">"name"</span>: <span class="string">"TranslatedModule"</span>,
+        <span class="string">"_cmd_doc_hello"</span>: <span class="string">"Сказать привет"</span>,
+        <span class="string">"_ihandle_doc_test"</span>: <span class="string">"Тестовая inline команда"</span>,
+        <span class="string">"_cls_doc"</span>: <span class="string">"Модуль с переводами"</span>
+    }
+    
+    <span class="comment"># Перевод на русский</span>
+    <span class="keyword">strings_ru</span> = {
+        <span class="string">"_cmd_doc_hello"</span>: <span class="string">"Сказать привет"</span>,
+        <span class="string">"_cls_doc"</span>: <span class="string">"Модуль с переводами"</span>
+    }
+    
+    <span class="comment"># Перевод на украинский</span>
+    <span class="keyword">strings_ua</span> = {
+        <span class="string">"_cmd_doc_hello"</span>: <span class="string">"Сказати привіт"</span>
+    }
+            </div>
+        </div>
+
+        <div class="doc-section" id="utils">
+            <h2>🛠️ Utils - утилиты и функции</h2>
+            <p>Модуль <code>utils</code> предоставляет множество helper функций.</p>
+            
+            <h3>Ответ на сообщение</h3>
+            <div class="code-block">
+<span class="comment"># Ответ на команду</span>
+<span class="keyword">await</span> utils.<span class="function">answer</span>(message, <span class="string">"Текст ответа"</span>)
+
+<span class="comment"># Ответ с форматированием</span>
+<span class="keyword">await</span> utils.<span class="function">answer</span>(
+    message,
+    <span class="string">"<b>Жирный</b> и <i>курсив</i>"</span>,
+    <span class="function">reply_markup</span>=buttons
+)
+
+<span class="comment"># Ответ в личку</span>
+<span class="keyword">await</span> utils.<span class="function">answer</span>(
+    message,
+    <span class="string">"Ответ в PM"</span>,
+    <span class="function">reply_to</span>=message.<span class="function">id</span>,
+    <span class="function">as_owner</span>=<span class="keyword">True</span>
+)
+            </div>
+
+            <h3>Работа с аргументами</h3>
+            <div class="code-block">
+<span class="comment"># Получить все аргументы как строку</span>
+args = utils.<span class="function">get_args_raw</span>(message)
+<span class="comment"># .команда привет мир -> "привет мир"</span>
+
+<span class="comment"># Получить аргументы как список</span>
+args = utils.<span class="function">get_args</span>(message)
+<span class="comment"># .команда привет мир -> ["привет", "мир"]</span>
+
+<span class="comment"># Получить конкретный аргумент</span>
+arg1 = utils.<span class="function">get_arg</span>(message, 0)
+arg2 = utils.<span class="function">get_arg</span>(message, 1)
+
+<span class="comment"># Проверить наличие аргументов</span>
+<span class="keyword">if</span> <span class="keyword">not</span> utils.<span class="function">get_args</span>(message):
+    <span class="keyword">await</span> utils.<span class="function">answer</span>(message, <span class="string">"Нужны аргументы!"</span>)
+    <span class="keyword">return</span>
+            </div>
+
+            <h3>Экранирование и безопасность</h3>
+            <div class="code-block">
+<span class="comment"># Экранирование HTML</span>
+safe_text = utils.<span class="function">escape_html</span>(user_input)
+<span class="comment"># < -> &lt;</span>
+
+<span class="comment"># Экранирование Markdown</span>
+safe_text = utils.<span class="function">escape_markdown</span>(user_input)
+
+<span class="comment"># Безопасная переменная (защита от инъекций)</span>
+<span class="function">safe_var</span> = utils.<span class="function">secure_html</span>(user_input)
+            </div>
+
+            <h3>Работа с DM</h3>
+            <div class="code-block">
+<span class="comment"># Проверка в личке ли</span>
+<span class="keyword">if</span> utils.<span class="function">is_pm</span>(message):
+    <span class="comment">"""В личке"""</span>
+
+<span class="comment"># Проверка в группе</span>
+<span class="keyword">if</span> utils.<span class="function">is_group</span>(message):
+    <span class="comment">"""В группе"""</span>
+
+<span class="comment"># Проверка в канале</span>
+<span class="keyword">if</span> utils.<span class="function">is_channel</span>(message):
+    <span class="comment">"""В канале"""</span>
+            </div>
+
+            <h3>Синхронное выполнение</h3>
+            <div class="code-block">
+<span class="comment"># Выполнить синхронный код в асинхронном контексте</span>
+result = <span class="keyword">await</span> utils.<span class="function">run_sync</span>(time.<span class="function">sleep</span>, 1)
+<span class="comment"># await run_sync(sync_function, arg1, arg2, ...)</span>
+            </div>
+
+            <h3>Работа с байтами</h3>
+            <div class="code-block">
+<span class="comment"># Скачать файл в байты</span>
+file_bytes = <span class="keyword">await</span> utils.<span class="function">download_media</span>(message)
+<span class="comment"># bytes = await download_media(message, allow_cache=False)</span>
+
+<span class="comment"># Получить имя файла</span>
+filename = utils.<span class="function">get_filename</span>(message)
+
+<span class="comment"># Получить расширение</span>
+ext = utils.<span class="function">get_extension</span>(message)
+            </div>
+
+            <h3>Генерация случайных данных</h3>
+            <div class="code-block">
+<span class="comment"># Случайный ID</span>
+random_id = utils.<span class="function">generate_id</span>()
+
+<span class="comment"># Случайная строка</span>
+random_str = utils.<span class="function">rand</span>(<span class="number">16</span>)
+
+<span class="comment"># ASCII лицо (¯\\_(ツ)_/¯)</span>
+face = utils.<span class="function">ascii_face</span>()
+            </div>
+        </div>
+<h2>🔌 Client и API</h2>
+            <p>Доступ к Telegram API через объект <code>self.client</code> (Telethon).</p>
+            
+            <h3>📥 get_me() - Информация о пользователе</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">ClientModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"ClientModule"</span>}
+    <span class="builtin">strings_ru</span> = {<span class="string">"_cmd_doc_myid"</span>: <span class="string">"Показать мой ID"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">myid_cmd</span>(<span class="self">self</span>, message):
+        <span class="string">"Показать мой ID"</span>
+        <span class="function">me</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">get_me</span>()
+        <span class="keyword">await</span> <span class="function">utils</span>.<span class="function">answer</span>(message, <span class="string">f"Твой ID: </span>{<span class="function">me</span>.<span class="function">id</span>}")
+</pre>
+            </div>
+
+            <h3>📤 send_message() - Отправка сообщений</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">SendModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"SendModule"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">send_cmd</span>(<span class="self">self</span>, message):
+        <span class="comment"># Отправка сообщения</span>
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">send_message</span>(
+            <span class="string">"username"</span>,
+            <span class="string">"Привет!"</span>
+        )
+</pre>
+            </div>
+
+            <h3>📎 send_file() - Отправка файлов</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">FileModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"FileModule"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">file_cmd</span>(<span class="self">self</span>, message):
+        <span class="comment"># Отправка файла</span>
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">send_file</span>(
+            <span class="string">"chat_id"</span>,
+            <span class="string">"path/to/file.jpg"</span>
+        )
+</pre>
+            </div>
+
+            <h3>📥 get_messages() - Получение сообщений</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">MsgModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"MsgModule"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">msgs_cmd</span>(<span class="self">self</span>, message):
+        <span class="function">messages</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">get_messages</span>(
+            <span class="string">"chat"</span>,
+            limit=10
+        )
+        <span class="keyword">for</span> <span class="function">msg</span> <span class="keyword">in</span> <span class="function">messages</span>:
+            <span class="function">logger</span>.<span class="function">info</span>(<span class="function">msg</span>.<span class="function">text</span>)
+</pre>
+            </div>
+
+            <h3>🗑️ delete_messages() - Удаление сообщений</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">DelModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"DelModule"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">del_cmd</span>(<span class="self">self</span>, message):
+        <span class="function">messages</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">get_messages</span>(message.<span class="function">chat_id</span>, limit=5)
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">delete_messages</span>(
+            message.<span class="function">chat_id</span>,
+            [<span class="function">msg</span>.<span class="function">id</span> <span class="keyword">for</span> <span class="function">msg</span> <span class="keyword">in</span> <span class="function">messages</span>]
+        )
+</pre>
+            </div>
+
+            <h3>👤 get_entity() - Работа с entity</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">EntityModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"EntityModule"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">entity_cmd</span>(<span class="self">self</span>, message):
+        <span class="comment"># Получение чата/пользователя с кэшированием</span>
+        <span class="function">chat</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">get_entity</span>(<span class="string">"username"</span>)
+        <span class="function">logger</span>.<span class="function">info</span>(<span class="function">chat</span>.<span class="function">title</span>)
+</pre>
+            </div>
+
+            <h3>👥 get_participants() - Участники чата</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">UsersModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"UsersModule"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">users_cmd</span>(<span class="self">self</span>, message):
+        <span class="function">participants</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">get_participants</span>(
+            message.<span class="function">chat_id</span>,
+            limit=100
+        )
+        <span class="keyword">await</span> <span class="function">utils</span>.<span class="function">answer</span>(
+            message,
+            <span class="string">f"Участников: </span>{<span class="keyword">len</span>(<span class="function">participants</span>)}"
+        )
+</pre>
+            </div>
+        </div>
+
+        <div class="doc-section" id="events">
+            <h2>⚡ События</h2>
+            <p>Обработка различных событий в боте через Telethon events.</p>
+            
+            <h3>📝 NewMessage - Новые сообщения</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="keyword">from</span> telethon <span class="keyword">import</span> events
+
+<span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">EventsModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"EventsModule"</span>}
+
+    <span class="keyword">async def</span> <span class="function">client_ready</span>(<span class="self">self</span>):
+        <span class="self">self</span>.<span class="function">client</span>.<span class="function">add_event_handler</span>(
+            <span class="self">self</span>.<span class="function">new_message_handler</span>,
+            events.<span class="function">NewMessage</span>(pattern=<span class="string">"привет"</span>)
+        )
+
+    <span class="keyword">async def</span> <span class="function">new_message_handler</span>(<span class="self">self</span>, event):
+        <span class="keyword">await</span> event.<span class="function">respond</span>(<span class="string">"Привет!"</span>)
+</pre>
+            </div>
+
+            <h3>✏️ MessageEdited - Редактирование</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="keyword">from</span> telethon <span class="keyword">import</span> events
+
+<span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">EditModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"EditModule"</span>}
+
+    <span class="keyword">async def</span> <span class="function">client_ready</span>(<span class="self">self</span>):
+        <span class="self">self</span>.<span class="function">client</span>.<span class="function">add_event_handler</span>(
+            <span class="self">self</span>.<span class="function">edit_handler</span>,
+            events.<span class="function">MessageEdited</span>()
+        )
+
+    <span class="keyword">async def</span> <span class="function">edit_handler</span>(<span class="self">self</span>, event):
+        <span class="function">logger</span>.<span class="function">info</span>(<span class="string">f"Отредактировано: </span>{<span class="function">event</span>.<span class="function">message</span>.<span class="function">text</span>}")
+</pre>
+            </div>
+
+            <h3>🗑️ MessageDeleted - Удаление</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="keyword">from</span> telethon <span class="keyword">import</span> events
+
+<span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">DelModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"DelModule"</span>}
+
+    <span class="keyword">async def</span> <span class="function">client_ready</span>(<span class="self">self</span>):
+        <span class="self">self</span>.<span class="function">client</span>.<span class="function">add_event_handler</span>(
+            <span class="self">self</span>.<span class="function">delete_handler</span>,
+            events.<span class="function">MessageDeleted</span>()
+        )
+
+    <span class="keyword">async def</span> <span class="function">delete_handler</span>(<span class="self">self</span>, event):
+        <span class="function">logger</span>.<span class="function">info</span>(
+            <span class="string">f"Удалено сообщений: </span>{<span class="keyword">len</span>(<span class="function">event</span>.<span class="function">messages</span>)}"
+        )
+</pre>
+            </div>
+
+            <h3>📞 CallEvent - Входящие звонки</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="keyword">from</span> telethon <span class="keyword">import</span> events
+
+<span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">CallModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"CallModule"</span>}
+
+    <span class="keyword">async def</span> <span class="function">client_ready</span>(<span class="self">self</span>):
+        <span class="self">self</span>.<span class="function">client</span>.<span class="function">add_event_handler</span>(
+            <span class="self">self</span>.<span class="function">call_handler</span>,
+            events.<span class="function">Call</span>()
+        )
+
+    <span class="keyword">async def</span> <span class="function">call_handler</span>(<span class="self">self</span>, event):
+        <span class="keyword">await</span> event.<span class="function">answer</span>()
+</pre>
+            </div>
+        </div>
+
+        <div class="doc-section" id="database">
+            <h2>💾 Работа с базой данных</h2>
+            <p>Heroku использует встроенную систему хранения данных.</p>
+            
+            <h3>💾 db.get()/db.set() - Основные методы</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">DatabaseModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"DatabaseModule"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">set_cmd</span>(<span class="self">self</span>, message):
+        <span class="comment"># С��хранение данных</span>
+        <span class="self">self</span>.<span class="function">db</span>.<span class="function">put</span>(<span class="string">"key"</span>, <span class="string">"value"</span>)
+        <span class="self">self</span>.<span class="function">db</span>.<span class="function">put</span>(<span class="string">"user_data"</span>, {<span class="string">"id"</span>: 123, <span class="string">"name"</span>: <span class="string">"Test"</span>})
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">get_cmd</span>(<span class="self">self</span>, message):
+        <span class="comment"># Получение данных</span>
+        <span class="function">value</span> = <span class="self">self</span>.<span class="function">db</span>.<span class="function">get</span>(<span class="string">"key"</span>, <span class="string">"default"</span>)
+        <span class="keyword">await</span> <span class="function">utils</span>.<span class="function">answer</span>(message, <span class="function">value</span>)
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">del_cmd</span>(<span class="self">self</span>, message):
+        <span class="comment"># Удаление данных</span>
+        <span class="self">self</span>.<span class="function">db</span>.<span class="function">remove</span>(<span class="string">"key"</span>)
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">has_cmd</span>(<span class="self">self</span>, message):
+        <span class="comment"># Проверка наличия</span>
+        <span class="function">exists</span> = <span class="self">self</span>.<span class="function">db</span>.<span class="function">contains</span>(<span class="string">"key"</span>)
+</pre>
+            </div>
+
+            <h3>📋 Пример: Список пользователей</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">UsersDBModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"UsersDBModule"</span>}
+
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="self">self</span>):
+        <span class="self">self</span>.<span class="function">users</span> = <span class="self">self</span>.<span class="function">pointer</span>(<span class="string">"users"</span>, [])
+
+    <span class="keyword">async def</span> <span class="function">add_user</span>(<span class="self">self</span>, user_id, name):
+        <span class="self">self</span>.<span class="function">users</span>.<span class="function">append</span>({
+            <span class="string">"id"</span>: user_id,
+            <span class="string">"name"</span>: name
+        })
+
+    <span class="keyword">async def</span> <span class="function">get_users</span>(<span class="self">self</span>):
+        <span class="keyword">return</span> <span class="self">self</span>.<span class="function">users</span>
+</pre>
+            </div>
+        </div>
+<span class="comment"># Получение информации о пользователе</span>
+me = <span class="keyword">await</span> self.<span class="function">client</span>.<span class="function">get_me</span>()
+<span class="keyword">await</span> utils.<span class="function">answer</span>(message, <span class="string">f"Твой ID: {me.id}"</span>)
+
+<span class="comment"># Отправка сообщения</span>
+<spanspan class="keyword">await</span> self.<span class="function">client</span>.<span class="function">send_message</span>(
+    <span class="string">"username"</span>,
+    <span class="string">"Привет!"</span>
+)
+
+<span class="comment"># Отправка файла</span>
+<span class="keyword">await</span> self.<span class="function">client</span>.<span class="function">send_file</span>(
+    <span class="string">"chat_id"</span>,
+    <span class="string">"path/to/file.jpg"</span>
+)
+
+<span class="comment"># Получение сообщений</span>
+messages = <span class="keyword">await</span> self.<span class="function">client</span>.<span class="function">get_messages</span>(
+    <span class="string">"chat"</span>,
+    <span class="number">limit</span>=10
+)
+
+<span class="comment"># Удаление сообщений</span>
+<span class="keyword">await</span> self.<span class="function">client</span>.<span class="function">delete_messages</span>(
+    <span class="string">"chat"</span>,
+    [msg.<span class="function">id</span> <span class="keyword">for</span> msg <span class="keyword">in</span> messages]
+)
+            </div>
+            <h3>Работа с entity (кэш)</h3>
+            <div class="code-block">
+<span class="comment"># Получение чата/пользователя с кэшированием</span>
+chat = <span class="keyword">await</span> self.<span class="function">client</span>.<span class="function">get_entity</span>(<span class="string">"username"</span>)
+
+<span class="comment"># Получение участников чата</span>
+participants = <span class="keyword">await</span> self.<span class="function">client</span>.<span class="function">get_participants</span>(
+    <span class="string">"chat_id"</span>,
+    <span class="function">limit</span>=100
+)
+            </div>
+        </div>
+
+        <div class="doc-section" id="events">
+            <h2>⚡ События</h2>
+            <p>Обработка различных событий в боте.</p>
+            <div class="code-block">
+<span class="keyword">from</span> telethon <span class="keyword">import</span> events
+
+<span class="comment"># Новое сообщение</span>
+<span class="keyword">@</span>self.<span class="function">client</span>.<span class="function">on</span>(events.NewMessage(<span class="function">pattern</span>=<span class="string">"привет"</span>))
+<span class="keyword">async def</span> <span class="function">handler</span>(event):
+    <span class="keyword">await</span> event.<span class="function">respond</span>(<span class="string">"Привет!"</span>)
+
+<span class="comment"># Измененное сообщение</span>
+<span class="keyword">@</span>self.<span class="function">client</span>.<span class="function">on</span>(events.MessageEdited(<span class="function">pattern</span>=<span class="string">"редакт"</span>))
+<span class="keyword">async def</span> <span class="function">edit_handler</span>(event):
+    <span class="keyword">await</span> self.<span class="function">inline</span>.<span class="function">answer</span>(
+        <span class="string">"Сообщение отредактировано"</span>
+    )
+
+<span class="comment"># Удаленное сообщение</span>
+<span class="keyword">@</span>self.<span class="function">client</span>.<span class="function">on</span>(events.MessageDeleted)
+<span class="keyword">async def</span> <span class="function">delete_handler</span>(event):
+    <span class="function">print</span>(<span class="string">f"Удалено сообщений: {len(event.messages)}"</span>)
+
+<span class="comment"># Входящий звонок</span>
+<span class="keyword">@</span>self.<span class="function">client</span>.<span class="function">on</span>(events.Call)
+<span class="keyword">async def</span> <span class="function">call_handler</span>(event):
+    <span class="keyword">await</span> event.<span class="function">answer</span>()
+            </div>
+        </div>
+
+        <div class="doc-section" id="database">
+            <h2>💾 Работа с базой данных</h2>
+            <p>Heroku использует встроенную систему хранения данных.</p>
+            <h3>Основные методы</h3>
+            <div class="code-block">
+<span class="comment"># Сохранение данных</span>
+<span class="keyword">await</span> self.<span class="function">db</span>.<span class="function">put</span>(<span class="string">"key"</span>, <span class="string">"value"</span>)
+<span class="keyword">await</span> self.<span class="function">db</span>.<span class="function">put</span>(<span class="string">"user_data"</span>, {<span class="string">"id"</span>: <span class="number">123</span>, <span class="string">"name"</span>: <span class="string">"Test"</span>})
+
+<span class="comment"># Получение данных</span>
+value = <span class="keyword">await</span> self.<span class="function">db</span>.<span class="function">get</span>(<span class="string">"key"</span>, <span class="string">"default"</span>)
+
+<span class="comment"># Получение всех данных</span>
+all_data = <span class="keyword">await</span> self.<span class="function">db</span>.<span class="function">get_all</span>()
+
+<span class="comment"># Удаление данных</span>
+<spanspan class="keyword">await</span> self.<span class="function">db</span>.<span class="function">remove</span>(<span class="string">"key"</span>)
+
+<span class="comment"># Проверка наличия</span>
+exists = <span class="keyword">await</span> self.<span class="function">db</span>.<span class="function">contains</span>(<span class="string">"key"</span>)
+            </div>
+            <h3>Пример использования</h3>
+            <div class="code-block">
+<span class="keyword">strings</span> = {
+    <span class="string">"name"</span>: <span class="string">"DataModule"</span>,
+    <span class="string">"saved"</span>: <span class="string">"Данные сохранены!"</span>,
+    <span class="string">"not_found"</span>: <span class="string">"Данные не найдены"</span>
+}
+
+<span class="keyword">@</span>loader.<span class="function">owner</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="string">"save"</span>)
+<span class="keyword">async def</span> <span class="function">save_cmd</span>(self, message):
+    <span class="comment"># Получаем аргумент</span>
+    args = utils.<span class="function">get_args</span>(message)
+    <span class="keyword">if</span> <span class="keyword">not</span> args:
+        <span class="keyword">return</span> <span class="function">await</span> utils.<span class="function">answer</span>(message, <span class="string">"Использование: .save [ключ] [значение]"</span>)
+    
+    key, value = args[<span class="number">0</span>], args[<span class="number">1</span>]
+    <span class="keyword">await</span> self.<span class="function">db</span>.<span class="function">put</span>(key, value)
+    <span class="keyword">await</span> utils.<span class="function">answer</span>(message, self.<span class="function">strings</span>[<span class="string">"saved"</span>])
+
+<span class="keyword">@</span>loader.<span class="function">owner</span>
+<span class="keyword">@</span>loader.<span class="function">command</span>(<span class="string">"get"</span>)
+<span class="keyword">async def</span> <span class="function">get_cmd</span>(self, message):
+    args = utils.<span class="function">get_args</span>(message)
+    <span class="keyword">if</span> <span class="keyword">not</span> args:
+        <span class="keyword">return</span> <span class="function">await</span> utils.<span class="function">answer</span>(message, <span class="string">"Использование: .get [ключ]"</span>)
+    
+    value = <span class="keyword">await</span> self.<span class="function">db</span>.<span class="function">get</span>(args[<span class="number">0</span>])
+    <span class="keyword">if</span> value:
+        <span class="keyword">await</span> utils.<span class="function">answer</span>(message, <span class="string">f"Значение: {value}"</span>)
+    <span class="keyword">else</span>:
+        <span class="keyword">await</span> utils.<span class="function">answer</span>(message, self.<span class="function">strings</span>[<span class="string">"not_found"</span>])
+            </div>
+        </div>
+
+        <div class="doc-section" id="redis">
+            <h2>🔴 Redis</h2>
+            <p>Heroku поддерживает Redis для кэширования и быстрого доступа к данным.</p>
+            <div class="info-box">
+                <strong>💡 Примечание:</strong> Redis требует дополнительной настройки в конфигурации.
+            </div>
+            <div class="code-block">
+<span class="comment"># Подключение к Redis</span>
+redis = <span class="keyword">await</span> self.<span class="function">redis</span>.<span class="function">get_redis</span>()
+
+<span class="comment"># Установка значения</span>
+<span class="keyword">await</span> redis.<span class="function">set</span>(<span class="string">"cache:key"</span>, <span class="string">"value"</span>)
+
+<span class="comment"># Получение значения</span>
+value = <span class="keyword">await</span> redis.<span class="function">get</span>(<span class="string">"cache:key"</span>)
+
+<span class="comment"># Удаление</span>
+<span class="keyword">await</span> redis.<span class="function">delete</span>(<span class="string">"cache:key"</span>)
+
+<span class="comment"># Список</span>
+<span class="keyword">await</span> redis.<span class="function">lpush</span>(<span class="string">"queue"</span>, <span class="string">"item"</span>)
+items = <span class="keyword">await</span> redis.<span class="function">lrange</span>(<span class="string">"queue"</span>, <span class="number">0</span>, -<span class="number">1</span>)
+            </div>
+        </div>
+
+<div class="doc-section" id="inline">
+            <h2>🔘 Inline формы и кнопки</h2>
+            <p>Создание интерактивных форм с кнопками через Heroku inline систему.</p>
+            
+            <h3>📝 inline.form() - Создание формы</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">InlineFormModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"InlineFormModule"</span>}
+    <span class="builtin">strings_ru</span> = {<span class="string">"_cmd_doc_form"</span>: <span class="string">"Показать форму"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">form_cmd</span>(<span class="self">self</span>, message):
+        <span class="string">"Показать форму"</span>
+        <span class="function">buttons</span> = [
+            [
+                {<span class="string">"text"</span>: <span class="string">"✅ Да"</span>, <span class="string">"callback"</span>: <span class="self">self</span>.<span class="function">yes_handler</span>},
+                {<span class="string">"text"</span>: <span class="string">"❌ Нет"</span>, <span class="string">"callback"</span>: <span class="self">self</span>.<span class="function">no_handler</span>}
+            ]
+        ]
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">inline</span>.<span class="function">form</span>(
+            <span class="string">"Вы уверены?"</span>,
+            buttons,
+            message=message
+        )
+
+    <span class="keyword">async def</span> <span class="function">yes_handler</span>(<span class="self">self</span>, call):
+        <span class="keyword">await</span> call.<span class="function">answer</span>(<span class="string">"Да!"</span>, <span class="keyword">True</span>)
+
+    <span class="keyword">async def</span> <span class="function">no_handler</span>(<span class="self">self</span>, call):
+        <span class="keyword">await</span> call.<span class="function">answer</span>(<span class="string">"Нет!"</span>, <span class="keyword">True</span>)
+</pre>
+            </div>
+
+            <h3>🔗 Типы кнопок</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="comment"># 1. Кнопка с функцией обратного вызова</span>
+{
+    <span class="string">"text"</span>: <span class="string">"Нажми меня"</span>,
+    <span class="string">"callback"</span>: <span class="self">self</span>.<span class="function">my_handler</span>,
+    <span class="string">"args"</span>: (<span class="string">"arg1"</span>, <span class="string">"arg2"</span>)
+}
+
+<span class="comment"># 2. Кнопка с кастомным payload</span>
+{
+    <span class="string">"text"</span>: <span class="string">"Свой payload"</span>,
+    <span class="string">"data"</span>: <span class="string">"custom_payload"</span>
+}
+
+<span class="comment"># 3. Кнопка-ссылка</span>
+{
+    <span class="string">"text"</span>: <span class="string">"Открыть сайт"</span>,
+    <span class="string">"url"</span>: <span class="string">"https://example.com"</span>
+}
+
+<span class="comment"># 4. Предопределенные действия</span>
+{<span class="string">"text"</span>: <span class="string">"Закрыть"</span>, <span class="string">"action"</span>: <span class="string">"close"</span>}
+{<span class="string">"text"</span>: <span class="string">"Удалить"</span>, <span class="string">"action"</span>: <span class="string">"unload"</span>}
+</pre>
+            </div>
+
+            <h3>🔧 Обработка callback</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="keyword">from</span> ..<span class="keyword">import</span> types
+
+<span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">CallbackModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"CallbackModule"</span>}
+
+    <span class="keyword">async def</span> <span class="function">_process_click</span>(<span class="self">self</span>, call: types.<span class="function">InlineCall</span>, arg1: <span class="builtin">str</span>):
+        <span class="comment"># Редактирование сообщения</span>
+        <span class="keyword">await</span> call.<span class="function">edit</span>(
+            <span class="string">"Новый текст"</span>,
+            reply_markup=[[{<span class="string">"text"</span>: <span class="string">"Ссылка"</span>, <span class="string">"url"</span>: <span class="string">"https://..."</span>}]]
+        )
+
+        <span class="comment"># Или удалить форму</span>
+        <span class="keyword">await</span> call.<span class="function">unload</span>()
+</pre>
+            </div>
+        </div>
+    <span class="function">chat_id</span> = call.<span class="function">form</span>.<span class="function">chat_id</span>
+    <span class="function">message_id</span> = call.<span class="function">form</span>.<span class="function">message_id</span>
+            </div>
+
+            <h3>Inline Query (@bot ...)</h3>
+            <div class="code-block">
+<span class="keyword">from</span> ..<span class="keyword">import</span> types
+
+<span class="comment"># Обработчик inline запроса</span>
+<span class="keyword">@</span>loader.<span class="function">owner</span>
+<span class="keyword">@</span>loader.<span class="function">inline_handler</span>()
+<span class="keyword">async def</span> <span class="function">my_inline_handler</span>(self, query: types.<span class="function">InlineQuery</span>):
+    <span class="string">"""Обработка inline запроса"""</span>
+    <span class="function">args</span> = query.<span class="function">args</span>  <span class="comment"># Текст после @bot ...
+    
+    <span class="comment"># Ответ текстом</span>
+    <span class="keyword">await</span> query.<span class="function">answer</span>([
+        {<span class="string">"message"</span>: <span class="string">"<b>Ответ</b>"</span>, <span class="string">"title"</span>: <span class="string">"Заголовок"</span>}
+    ])
+    
+    <span class="comment"># Ответ фото</span>
+    <span class="keyword">await</span> query.<span class="function">answer</span>([
+        {<span class="string">"photo"</span>: <span class="string">"https://..."</span>, <span class="string">"title"</span>: <span class="string">"Фото"</span>}
+    ])
+    
+    <span class="comment"># Ответ видео</span>
+    <span class="keyword">await</span> query.<span class="function">answer</span>([
+        {<span class="string">"video"</span>: <span class="string">"https://..."</span>, <span class="string">"title"</span>: <span class="string">"Видео"</span>}
+    ])
+    
+    <span class="comment"># Ответ файлом</span>
+    <span class="keyword">await</span> query.<span class="function">answer</span>([
+        {<span class="string">"file"</span>: <span class="string">"https://..."</span>, <span class="string">"mime_type"</span>: <span class="string">"application/pdf"</span>, <span class="string">"title"</span>: <span class="string">"PDF"</span>}
+    ])
+    
+    <span class="comment"># Ответ GIF</span>
+    <span class="keyword">await</span> query.<span class="function">answer</span>([
+        {<span class="string">"gif"</span>: <span class="string">"https://..."</span>, <span class="string">"title"</span>: <span class="string">"GIF"</span>}
+    ])
+
+<span class="comment"># Коды ошибок inline</span>
+<span class="keyword">await</span> query.<span class="function">e400</span>()  <span class="comment"># Неверные аргументы</span>
+<span class="keyword">await</span> query.<span class="function">e403</span>()  <span class="comment"># Нет доступа</span>
+<span class="keyword">await</span> query.<span class="function">e404</span>()  <span class="comment"># Не найдено</span>
+<span class="keyword">await</span> query.<span class="function">e426</span>()  <span class="comment"># Требуется обновление</span>
+<span class="keyword">await</span> query.<span class="function">e500</span>()  <span class="comment"># Ошибка модуля</span>
+            </div>
+
+            <h3>Галереи</h3>
+            <div class="code-block">
+<span class="comment"># Галерея с callback</span>
+<span class="keyword">async def</span> <span class="function">next_photo</span>():
+    <span class="string">"""Получение следующего фото"""</span>
+    <span class="keyword">return</span> <span class="string">"https://api.catboys.com/img"</span>
+
+<span class="keyword">async def</span> <span class="function">generate_caption</span>():
+    <span class="string">"""Генерация подписи"""</span>
+    <span class="keyword">return</span> <span class="string">"Случайное фото 🐱"</span>
+
+<span class="keyword">await</span> self.<span class="function">inline</span>.<span class="function">gallery</span>(
+    <span class="function">message</span>=message,
+    <span class="function">next_handler</span>=next_photo,
+    <span class="function">caption</span>=generate_caption,
+    <span class="function">force_me</span>=<span class="keyword">False</span>,
+    <span class="function">ttl</span>=3600,
+    <span class="function">preload</span>=<span class="keyword">True</span>,      <span class="comment"># Предзагрузка</span>
+    <span class="function">gif</span>=<span class="keyword">False</span>,
+    <span class="function">silent</span>=<span class="keyword">False</span>
+)
+
+<span class="comment"># Inline Gallery (через @bot)</span>
+<span class="keyword">async def</span> <span class="function">cat_gallery_handler</span>(self, query):
+    <span class="keyword">await</span> self.<span class="function">inline</span>.<span class="function">query_gallery</span>(
+        query,
+        [{
+            <span class="string">"title"</span>: <span class="string">"Котик 🐱"</span>,
+            <span class="string">"description"</span>: <span class="string">"Случайное фото котика"</span>,
+            <span class="string">"next_handler"</span>: next_photo,
+            <span class="string">"caption"</span>: <span class="string">"<i>Наслаждайтесь!</i>"</span>
+        }]
+    )
+            </div>
+
+            <h3>Списки (Lists)</h3>
+            <div class="code-block">
+<span class="comment"># Inline список</span>
+<span class="keyword">await</span> self.<span class="function">inline</span>.<span class="function">list</span>(
+    <span class="function">message</span>=message,
+    <span class="function">strings</span>=[<span class="string">"Пункт 1"</span>, <span class="string">"Пункт 2"</span>, <span class="string">"Пункт 3"</span>],
+    <span class="function">force_me</span>=<span class="keyword">False</span>,
+    <span class="function">ttl</span>=300,
+    <span class="function">silent</span>=<span class="keyword">False</span>,
+    <span class="function">custom_buttons</span>=[[{<span class="string">"text"</span>: <span class="string">"Доп. кнопка"</span>, <span class="string">"url"</span>: <span class="string">"https://..."</span>}]]
+)
+            </div>
+        </div>
+
+        <div class="doc-section" id="forms">
+            <h2>⌨️ Кнопки и клавиатуры</h2>
+            <h3>Клавиатуры</h3>
+            <div class="code-block">
+<span class="keyword">from</span> telethon.tl <span class="keyword">import</span> types
+
+<span class="comment"># Простая клавиатура</span>
+keyboard = [
+    [<span class="function">types.KeyboardButtonUrl</span>(<span class="string">"Сайт"</span>, <span class="string">"https://example.com"</span>)],
+    [<span class="function">types.KeyboardButtonCallback</span>(<span class="string">"Кнопка"</span>, <span class="string">"data"</span>)]
+]
+
+<span class="keyword">await</span> self.<span class="function">client</span>.<span class="function">send_message</span>(
+    <span class="string">"chat"</span>,
+    <span class="string">"Выберите действие"</span>,
+    <span class="function">buttons</span>=keyboard
+)
+
+<span class="comment"># Inline клавиатура</span>
+inline_kb = [
+    [
+        {<span class="string">"text"</span>: <span class="string">"Да"</span>, <span class="string">"callback"</span>: <span class="string">"yes"</span>},
+        {<span class="string">"text"</span>: <span class="string">"Нет"</span>, <span class="string">"callback"</span>: <span class="string">"no"</span>}
+    ]
+]
+            </div>
+        </div>
+
+        <div class="doc-section" id="galleries">
+            <h2>🖼️ Галереи</h2>
+            <p>Создание галерей для просмотра фото.</p>
+            <div class="code-block">
+<span class="comment"># Создание галереи</span>
+<span class="keyword">await</span> self.<span class="function">gallery</span>.<span class="function">create</span>(
+    <span class="string">"gallery_id"</span>,
+    [
+        {<span class="string">"photo"</span>: <span class="string">"photo1.jpg"</span>, <span class="string">"text"</span>: <span class="string">"Фото 1"</span>},
+        {<span class="string">"photo"</span>: <span class="string">"photo2.jpg"</span>, <span class="string">"text"</span>: <span class="string">"Фото 2"</span>}
+    ]
+)
+
+<span class="comment"># Отображение галереи</span>
+<span class="keyword">await</span> self.<span class="function">gallery</span>.<span class="function">show</span>(<span class="string">"gallery_id"</span>, <span class="string">"chat"</span>)
+            </div>
+</div>
+
+        <div class="doc-section" id="advanced-functions">
+            <h2>⚡ Продвинутые функции (из исходного кода)</h2>
+            <p>Скрытые функции из modules/loader.py, types.py и других модулей ядра. Эти функции не документированы в официальном вики, но доступны для использования в модулях.</p>
+            
+            <h3>📌 get_prefix() - Получение префикса команд</h3>
+            <div class="info-box">
+                <strong>📂 Исходник:</strong> <code>heroku/loader.py</code> → <code>Modules.get_prefix()</code>
+            </div>
+            <p>Функция получает префикс команд из базы данных. Можно получить префикс для конкретного чата или глобальный.</p>
+            
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">TestModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {
+        <span class="string">"name"</span>: <span class="string">"TestModule"</span>,
+    }
+
+    <span class="keyword">async def</span> <span class="function">client_ready</span>(<span class="self">self</span>):
+        <span class="comment"># Глобальный префикс</span>
+        <span class="function">global_prefix</span> = <span class="self">self</span>.<span class="function">get_prefix</span>()
+        <span class="comment"># Результат: '.'</span>
+
+        <span class="comment"># Префикс для конкретного чата</span>
+        <span class="function">chat_prefix</span> = <span class="self">self</span>.<span class="function">get_prefix</span>(-1001234567890)
+
+        <span class="comment"># Использование с префиксом</span>
+        <span class="function">cmd</span> = <span class="function">global_prefix</span> + <span class="string">"test"</span>  <span class="comment"># '.test'</span>
+</pre>
+            </div>
+
+            <h3>📌 get_prefixes() - Получение всех префиксов</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="function">all_prefixes</span> = <span class="self">self</span>.<span class="function">get_prefixes</span>()
+        <span class="comment"># Результат: {'!', '.', '/', '-'}</span>
+
+<span class="keyword">for</span> <span class="function">prefix</span> <span class="keyword">in</span> <span class="function">all_prefixes</span>:
+            <span class="function">logger</span>.<span class="function">info</span>(<span class="string">f"Доступен префикс: </span>{<span class="function">prefix</span>}")
+</pre>
+            </div>
+
+            <h3>📊 pointer() - Указатели на данные</h3>
+            <div class="info-box">
+                <strong>📂 Исходник:</strong> <code>heroku/types.py</code> → <code>Module.pointer()</code>
+            </div>
+            <p>Создает "умный" указа��ель на данные в БД. Изменения автоматически сохраняются.</p>
+            
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">UsersModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"UsersModule"</span>}
+
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="self">self</span>):
+        <span class="comment"># Указатель на список</span>
+        <span class="self">self</span>.<span class="function">users</span> = <span class="self">self</span>.<span class="function">pointer</span>(<span class="string">"registered_users"</span>, [])
+
+    <span class="keyword">async def</span> <span class="function">register_user</span>(<span class="self">self</span>, user_id: <span class="builtin">int</span>, name: <span class="builtin">str</span>):
+        <span class="comment"># Добавление - автоматически сохраняется в БД</span>
+        <span class="self">self</span>.<span class="function">users</span>.<span class="function">append</span>({
+            <span class="string">"id"</span>: user_id,
+            <span class="string">"name"</span>: name
+        })
+        <span class="comment"># Не нужно вызывать db.set()!</span>
+
+    <span class="keyword">async def</span> <span class="function">unregister_user</span>(<span class="self">self</span>, user_id: <span class="builtin">int</span>):
+        <span class="comment"># Удаление</span>
+        <span class="self">self</span>.<span class="function">users</span> = [<span class="function">u</span> <span class="keyword">for</span> <span class="function">u</span> <span class="keyword">in</span> <span class="self">self</span>.<span class="function">users</span> <span class="keyword">if</span> <span class="function">u</span>[<span class="string">"id"</span>] != user_id]
+
+    <span class="keyword">async def</span> <span class="function">get_all_users</span>(<span class="self">self</span>):
+        <span class="keyword">return</span> <span class="self">self</span>.<span class="function">users</span>
+</pre>
+            </div>
+
+            <h3>📊 PointerDict - словарь с автосохранением</h3>
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">ConfigModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"ConfigModule"</span>}
+
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="self">self</span>):
+        <span class="self">self</span>.<span class="function">settings</span> = <span class="self">self</span>.<span class="function">pointer</span>(<span class="string">"settings"</span>, {})
+
+    <span class="keyword">async def</span> <span class="function">set_setting</span>(<span class="self">self</span>, key: <span class="builtin">str</span>, value):
+        <span class="self">self</span>.<span class="function">settings</span>[key] = value
+        <span class="comment"># Автоматически сохраняется!</span>
+
+    <span class="keyword">async def</span> <span class="function">get_setting</span>(<span class="self">self</span>, key: <span class="builtin">str</span>, default=<span class="keyword">None</span>):
+        <span class="keyword">return</span> <span class="self">self</span>.<span class="function">settings</span>.<span class="function">get</span>(key, default)
+</pre>
+            </div>
+
+            <h3>🔍 lookup() - Поиск модулей</h3>
+            <div class="info-box">
+                <strong>📂 Исходник:</strong> <code>heroku/loader.py</code> → <code>Modules.lookup()</code>
+            </div>
+            <p>Ищет загруженный модуль или библиотеку по имени.</p>
+            <div class="code-block">
+<span class="string">"Сигнатура: def lookup(self, modname: str) -> Module | Library | bool"</span>
+<span class="string">"Параметры:"</span>
+<span class="string">"  modname: str - имя модуля или библиотеки"</span>
+<span class="string">"Возвращает: Module/Library если найден, False если не найден"</span>
+
+<span class="function">strings</span> = {<span class="string">"name"</span>: <span class="string">"TestModule"</span>}
+
+<span class="keyword">async def</span> <span class="function">client_ready</span>(self):
+    <span class="comment"># Поиск модуля по имени класса</span>
+    <span class="function">help_mod</span> = <span class="keyword">self</span>.<span class="function">lookup</span>(<span class="string">"Help"</span>)
+    <span class="keyword">if</span> <span class="function">help_mod</span>:
+        <span class="function">logger</span>.<span class="function">info</span>(<span class="string">f"Найден модуль: {help_mod.__class__.__name__}"</span>)
+    
+    <span class="comment"># Поиск библиотеки</span>
+    <span class="function">requests_lib</span> = <span class="keyword">self</span>.<span class="function">lookup</span>(<span class="string">"requests"</span>)
+    <span class="keyword">if</span> <span class="function">requests_lib</span>:
+        <span class="function">logger</span>.<span class="function">info</span>(<span class="string">"Библиотека requests доступна"</span>)
+    
+<span class="comment"># Проверка существования</span>
+    <span class="keyword">if not</span> <span class="self">self</span>.<span class="function">lookup</span>(<span class="string">"SomeModule"</span>):
+        <span class="function">logger</span>.<span class="function">warning</span>(<span class="string">"Модуль не найден"</span>)
+            </div>
+
+            <h3>🎯 invoke() - Вызов команд других модулей</h3>
+            <div class="info-box">
+                <strong>📂 Исходник:</strong> <code>heroku/types.py</code> → <code>Module.invoke()</code>
+            </div>
+            <p>Позволяет программно вызвать команду другого модуля.</p>
+            
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">InvokeModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"InvokeModule"</span>}
+
+    <span class="keyword">async def</span> <span class="function">call_help</span>(<span class="self">self</span>, message):
+        <span class="comment"># Вызвать команду help</span>
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">invoke</span>(<span class="string">"help"</span>)
+
+    <span class="keyword">async def</span> <span class="function">call_with_args</span>(<span class="self">self</span>, message):
+        <span class="comment"># Вызвать команду с аргументами</span>
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">invoke</span>(<span class="string">"say"</span>, <span class="string">"Привет всем!"</span>)
+
+    <span class="keyword">async def</span> <span class="function">call_in_chat</span>(<span class="self">self</span>, message, chat):
+        <span class="comment"># Вызвать в конкретном чате</span>
+        <span class="function">chat_entity</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">get_entity</span>(chat)
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">invoke</span>(<span class="string">"ping"</span>, <span class="string">""</span>, peer=<span class="function">chat_entity</span>)
+
+    <span class="keyword">async def</span> <span class="function">edit_message</span>(<span class="self">self</span>, message, new_text):
+        <span class="comment"># Отредактировать сообщение</span>
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">invoke</span>(
+            <span class="string">"edit"</span>,
+            new_text,
+            message=message,
+            edit=<span class="keyword">True</span>
+        )
+</pre>
+            </div>
+
+            <h3>📥 import_lib() - Импорт библиотек</h3>
+            <div class="info-box">
+                <strong>📂 Исходник:</strong> <code>heroku/types.py</code> → <code>Module.import_lib()</code>
+            </div>
+            <p>Динамически загружает библиотеку по URL.</p>
+            
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">LibModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"LibModule"</span>}
+    <span class="builtin">strings_en</span> = {<span class="string">"_cls_doc"</span>: <span class="string">"Uses external library"</span>}
+
+    <span class="keyword">async def</span> <span class="function">client_ready</span>(<span class="self">self</span>):
+        <span class="comment"># Простой импорт библиотеки</span>
+        <span class="function">lib</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">import_lib</span>(
+            <span class="string">"https://raw.githubusercontent.com/user/repo/main/lib.py"</span>
+        )
+        <span class="function">logger</span>.<span class="function">info</span>(<span class="string">f"Загружена библиотека: </span>{<span class="function">lib</span>.<span class="function">name</span>}")
+</pre>
+            </div>
+            suspend_on_error=<span class="keyword">True</span>
+        )
+    <span class="keyword">except</span> Exception <span class="keyword">as</span> <span class="function">e</span>:
+        <span class="function">logger</span>.<span class="function">info</span>(<span class="string">f"Библиотека недоступна: {e}"</span>)
+            </div>
+            <p><strong>Требования к библиотеке:</strong> URL должен вести на Python файл, класс должен называться с окончанием <code>Lib</code> и наследоваться от <code>Library</code>.</p>
+
+            <h3>🔄 request_join() - Запрос на вступление</h3>
+            <div class="info-box">
+                <strong>Исходник:</strong> <code>heroku/types.py</code> → <code>Module.request_join()</code>
+            </div>
+            <p>Запрашивает у пользователя вступление в канал/группу.</p>
+            <div class="code-block">
+<span class="string">"Сигнатура: async def request_join(self, peer, reason, assure_joined=False)"</span>
+<span class="string">"Параметры:"</span>
+<span class="string">"  peer: EntityLike - канал/группа"</span>
+<span class="string">"  reason: str - причина"</span>
+<span class="string">"  assure_joined: bool - модуль не загрузится без вступления"</span>
+<span class="string">"Возвращает: bool - True если вступил"</span>
+
+<span class="function">strings</span> = {<span class="string">"name"</span>: <span class="string">"TestModule"</span>}
+
+<span class="string">"strings_ru"</span>: {<span class="string">"need_channel"</span>: <span class="string">"Требуется вступление в канал"</span>}
+
+<span class="keyword">async def</span> <span class="function">client_ready</span>(self):
+    <span class="comment"># Простой запрос (не блокирует загрузку)</span>
+    <span class="function">result</span> = <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">request_join</span>(
+        <span class="string">"t.me/mychannel"</span>,
+        <span class="string">"Для работы модуля"</span>
+    )
+
+<span class="keyword">async def</span> <span class="function">client_ready</span>(self):
+    <span class="comment"># Гарантированное вступление (блокирует загрузку)</span>
+    <span class="function">result</span> = <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">request_join</span>(
+        <span class="string">"t.me/required_channel"</span>,
+        <span class="string">"Обязательно для работы"</span>,
+        assure_joined=<span class="keyword">True</span>  <span class="comment"># Если не вступит - модуль не загрузится</span>
+    )
+            </div>
+
+            <h3>📊 db.get()/db.set() - Прямая работа с БД</h3>
+            <div class="info-box">
+                <strong>Исходник:</strong> <code>heroku/database.py</code>
+            </div>
+            <p>Низкоуровневый доступ к базе данных.</p>
+            <div class="code-block">
+<span class="string">"Методы Database:"</span>
+<span class="string">"  get(module: str, key: str, default=None) -> JSONSerializable"</span>
+<span class="string">"  set(module: str, key: str, value: JSONSerializable)"</span>
+<span class="string">"  del(module: str, key: str)"</span>
+<span class="string">"  pointer(module: str, key: str, default=None, item_type=None)"</span>
+
+<span class="function">strings</span> = {<span class="string">"name"</span>: <span class="string">"TestModule"</span>}
+
+<span class="keyword">async def</span> <span class="function">client_ready</span>(self):
+    <span class="comment"># Получить значение</span>
+    <span class="function">value</span> = <span class="keyword">self</span>.<span class="function">db</span>.<span class="function">get</span>(<span class="string">"TestModule"</span>, <span class="string">"some_key"</span>, <span class="string">"default"</span>)
+    <span class="function">logger</span>.<span class="function">info</span>(<span class="string">f"Значение: {value}"</span>)
+
+<span class="keyword">async def</span> <span class="function">save_data</span>(self):
+    <span class="comment"># Сохранить значение</span>
+    <span class="keyword">self</span>.<span class="function">db</span>.<span class="function">set</span>(<span class="string">"TestModule"</span>, <span class="string">"counter"</span>, 42)
+
+<span class="keyword">async def</span> <span class="function">delete_data</span>(self):
+    <span class="comment"># Удалить ключ</span>
+    <span class="keyword">self</span>.<span class="function">db</span>.<span class="function">del</span>(<span class="string">"TestModule"</span>, <span class="string">"old_key"</span>)
+
+<span class="keyword">async def</span> <span class="function">get_module_all</span>(self):
+    <span class="comment"># Получить все данные модуля</span>
+    <span class="function">all_data</span> = <span class="keyword">self</span>.<span class="function">db</span>.<span class="function">get</span>(<span class="string">"TestModule"</span>)
+            </div>
+
+            <h3>🎭 self.get()/self.set() - shortcut методы</h3>
+            <div class="code-block">
+<span class="string">"Сигнатура: def get(self, key: str, default=None) -> JSONSerializable"</span>
+<span class="string">"Сигнатура: def set(self, key: str, value: JSONSerializable) -> bool"</span>
+
+<span class="function">strings</span> = {<span class="string">"name"</span>: <span class="string">"TestModule"</span>}
+
+<span class="keyword">async def</span> <span class="function">client_ready</span>(self):
+    <span class="comment"># Получить (автоматически использует имя класса как module)</span>
+    <span class="function">value</span> = <span class="keyword">self</span>.<span class="function">get</span>(<span class="string">"key"</span>, <span class="string">"default"</span>)
+
+<span class="keyword">async def</span> <span class="function">save_data</span>(self):
+    <span class="comment"># Сохранить (автоматически использует имя класса как module)</span>
+    <span class="keyword">self</span>.<span class="function">set</span>(<span class="string">"key"</span>, <span class="string">"value"</span>)
+    <span class="comment"># Эквивалентно: db.set('TestModule', 'key', 'value')</span>
+            </div>
+
+<span class="comment"># Вызов команды в конкретном чате</span>
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">invoke</span>(<span class="string">"ping"</span>, <span class="string">""</span>, peer=chat_entity)
+
+<span class="comment"># Отредактировать существующее сообщение</span>
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">invoke</span>(<span class="string">"edit"</span>, <span class="string">"Новый текст"</span>, message=message, edit=<span class="keyword">True</span>)
+            </div>
+
+            <h3>📥 Импорт библиотек</h3>
+            <div class="code-block">
+<span class="comment"># Импорт библиотеки по URL</span>
+<span class="function">lib</span> = <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">import_lib</span>(
+    <span class="string">"https://raw.githubusercontent.com/..."</span>
+)
+
+<span class="comment"># Импорт с приостановкой при ошибке</span>
+<span class="function">lib</span> = <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">import_lib</span>(
+    <span class="string">"https://..."</span>,
+    suspend_on_error=<span class="keyword">True</span>
+)
+            </div>
+
+            <h3>🔄 Запрос на вступление в канал</h3>
+            <div class="code-block">
+<span class="comment"># Запросить вступление в канал</span>
+<span class="comment"># request_join(peer, reason, assure_joined=False)</span>
+
+<span class="comment"># Простой запрос</span>
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">request_join</span>(
+    <span class="string">"t.me/durov"</span>,
+    <span class="string">"Хочу использовать модуль"</span>
+)
+
+<span class="comment"># Запрос с гарантией вступления</span>
+<span class="comment"># Модуль не загрузится если пользователь не вступит</span>
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">request_join</span>(
+    <span class="string">"t.me/mychannel"</span>,
+    <span class="string">"Требуется для работы"</span>,
+    assure_joined=<span class="keyword">True</span>
+)
+            </div>
+
+            <h3>📊 Прямая работа с БД</h3>
+            <div class="code-block">
+<span class="comment"># Получить значение</span>
+<span class="function">value</span> = <span class="keyword">self</span>.<span class="function">db</span>.<span class="function">get</span>(<span class="string">"module_name"</span>, <span class="string">"key"</span>, <span class="string">"default"</span>)
+
+<span class="comment"># Установить значение</span>
+<span class="keyword">self</span>.<span class="function">db</span>.<span class="function">set</span>(<span class="string">"module_name"</span>, <span class="string">"key"</span>, <span class="string">"value"</span>)
+
+<span class="comment"># Удалить ключ</span>
+<span class="keyword">self</span>.<span class="function">db</span>.<span class="function">del</span>(<span class="string">"module_name"</span>, <span class="string">"key"</span>)
+
+<span class="comment"># Получить все значения модуля</span>
+<span class="function">all_data</span> = <span class="keyword">self</span>.<span class="function">db</span>.<span class="function">get</span>(<span class="string">"module_name"</span>)
+
+<span class="comment"># Работа с указателями в db напрямую</span>
+<span class="function">ptr</span> = <span class="keyword">self</span>.<span class="function">db</span>.<span class="function">pointer</span>(<span class="string">"module"</span>, <span class="string">"key"</span>, [])
+            </div>
+
+            <h3>🔧 Module Config с валидаторами</h3>
+            <div class="code-block">
+<span class="keyword">class</span> <span class="function">MyModule</span>(loader.<span class="function">Module</span>):
+    <span class="function">strings</span> = {<span class="string">"name"</span>: <span class="string">"MyModule"</span>}
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(self):
+        <span class="keyword">self</span>.<span class="function">config</span> = loader.<span class="function">ModuleConfig</span>(
+            <span class="string">"token"</span>,  <span class="comment"># option</span>
+            <span class="string">""</span>,       <span class="comment"># default</span>
+            <span class="string">"Bot token"</span>  <span class="comment"># docstring</span>
+        )
+
+<span class="comment"># С валидатором</span>
+<span class="keyword">def</span> <span class="function">validate_token</span>(value):
+    <span class="keyword">if</span> <span class="keyword">not</span> value.startswith(<span class="string">"dddd:"</span>):
+        <span class="keyword">raise</span> <span class="function">Exception</span>(<span class="string">"Invalid token"</span>)
+    <span class="keyword">return</span> value
+
+<span class="keyword">self</span>.<span class="function">config</span> = loader.<span class="function">ModuleConfig</span>(
+    <span class="string">"token"</span>,
+    <span class="string">""</span>,
+    <span class="string">"Bot token"</span>
+)
+<span class="keyword">self</span>.<span class="function">config</span>.<span class="function">change_validator</span>(<span class="string">"token"</span>, validator)
+            </div>
+</div>
+
+        <div class="doc-section" id="chat-creation">
+            <h2>💬 Создание чатов и каналов</h2>
+            <p>Программное создание чатов, каналов и групп через Heroku-TL (Telethon).</p>
+            
+            <h3>📝 create_channel() - Создание группы/канала</h3>
+            <div class="info-box">
+                <strong>📂 Исходник:</strong> <code>herokutl/tl/functions/messages.py</code> → <code>CreateChannelRequest</code>
+            </div>
+            <p>Создает канал или группу. Использует Telethon API напрямую.</p>
+            
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">ChatModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"ChatModule"</span>}
+    <span class="builtin">strings_ru</span> = {<span class="string">"_cmd_doc_create"</span>: <span class="string">"Создать новую группу"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">create_cmd</span>(<span class="self">self</span>, message):
+        <span class="string">"Создать новую группу"</span>
+        <span class="function">chat</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">create_channel</span>(
+            <span class="string">"Моя группа"</span>,  <span class="comment"># title</span>
+            <span class="string">"Описание группы"</span>,  <span class="comment"># about</span>
+            <span class="keyword">True</span>  <span class="comment"># megagroup=True → супергруппа</span>
+        )
+        <span class="function">chat_id</span> = <span class="function">chat</span>.<span class="function">chats</span>[0].<span class="function">id</span>
+        <span class="keyword">await</span> <span class="function">utils</span>.<span class="function">answer</span>(message, <span class="string">f"Создана группа: </span>{<span class="function">chat_id</span>}")
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">create_channel_cmd</span>(<span class="self">self</span>, message):
+        <span class="string">"Создать канал"</span>
+        <span class="function">channel</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">create_channel</span>(
+            <span class="string">"Новости"</span>,
+            <span class="string">"Канал с новостями"</span>,
+            <span class="keyword">False</span>  <span class="comment"># megagroup=False → канал</span>
+        )
+        <span class="keyword">await</span> <span class="function">utils</span>.<span class="function">answer</span>(message, <span class="string">"Канал создан!"</span>)
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">create_with_photo_cmd</span>(<span class="self">self</span>, message):
+        <span class="string">"Создать группу с фото"</span>
+        <span class="comment"># Загружаем фото</span>
+        <span class="function">photo</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">upload_file</span>(<span class="string">"/path/to/photo.jpg"</span>)
+        <span class="function">chat</span> = <span class="keyword">await</span> <span class="self">self</span>.<span class="function">client</span>.<span class="function">create_channel</span>(
+            <span class="string">"Группа с фото"</span>,
+            <span class="string">"Красивая группа"</span>,
+            <span class="keyword">True</span>,
+            photo=photo
+        )
+        <span class="keyword">await</span> <span class="function">utils</span>.<span class="function">answer</span>(message, <span class="string">"Группа с фото создана!"</span>)
+</pre>
+            </div>
+
+            <h3>👥 invite() - Приглашение участников</h3>
+            <div class="code-block">
+<span class="string">"Сигнатура: async def invite(entity, users)"</span>
+<span class="string">"Параметры:"</span>
+<span class="string">"  entity: EntityLike - чат"</span>
+<span class="string">"  users: list - список пользователей"</span>
+
+<span class="function">strings</span> = {<span class="string">"name"</span>: <span class="string">"ChatModule"</span>}
+
+<span class="keyword">async def</span> <span class="function">invite_user</span>(self, chat, user_id):
+    <span class="function">user</span> = <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">get_entity</span>(user_id)
+    <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">invite</span>(chat, [user])
+
+<span class="keyword">async def</span> <span class="function">invite_multiple</span>(self, chat, user_ids):
+    <span class="function">users</span> = <span class="keyword">await</span> <span class="function">asyncio.gather</span>(*[
+        <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">get_entity</span>(uid) <span class="keyword">for</span> <span class="function">uid</span> <span class="keyword">in</span> user_ids
+    ])
+    <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">invite</span>(chat, users)
+            </div>
+
+            <h3>🔧 edit_title/edit_about/edit_photo</h3>
+            <div class="code-block">
+<span class="string">"Методы для изменения чата:"</span>
+<span class="string">"  edit_title(entity, title)"</span>
+<span class="string">"  edit_about(entity, about)"</span>
+<span class="string">"  edit_photo(entity, photo)"</span>
+<span class="string">"  pin_message(entity, message)"</span>
+<span class="string">"  unpin_message(entity)"</span>
+
+<span class="function">strings</span> = {<span class="string">"name"</span>: <span class="string">"ChatModule"</span>}
+
+<span class="keyword">async def</span> <span class="function">rename_chat</span>(self, chat, new_name):
+    <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">edit_title</span>(chat, new_name)
+
+<span class="keyword">async def</span> <span class="function">set_description</span>(self, chat, desc):
+    <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">edit_about</span>(chat, desc)
+
+<span class="keyword">async def</span> <span class="function">change_photo</span>(self, chat, photo_path):
+    <span class="function">photo</span> = <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">upload_file</span>(photo_path)
+    <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">edit_photo</span>(chat, photo)
+
+<span class="keyword">async def</span> <span class="function">pin_msg</span>(self, chat, msg):
+    <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">pin_message</span>(chat, msg)
+            </div>
+        </div>
+
+        <div class="doc-section" id="langpacks">
+            <h2>🌐 Языковые пакеты (Langpacks)</h2>
+            <p>Система переводов и языковых пакетов в Heroku.</p>
+            
+            <h3>📖 Базовая структура переводов</h3>
+            <div class="code-block">
+<span class="keyword">@</span>loader.<span class="function">tds</span>
+<span class="keyword">class</span> <span class="function">TranslatedModule</span>(loader.<span class="function">Module</span>):
+    <span class="function">strings</span> = {
+        <span class="string">"name"</span>: <span class="string">"MyModule"</span>,
+        <span class="string">"welcome"</span>: <span class="string">"Hello!"</span>,
+        <span class="string">"goodbye"</span>: <span class="string">"Goodbye!"</span>,
+        <span class="string">"_cmd_doc_hello"</span>: <span class="string">"Say hello"</span>
+    }
+    
+    <span class="comment"># Русский перевод</span>
+    <span class="function">strings_ru</span> = {
+        <span class="string">"welcome"</span>: <span class="string">"Привет!"</span>,
+        <span class="string">"goodbye"</span>: <span class="string">"Пока!"</span>,
+        <span class="string">"_cmd_doc_hello"</span>: <span class="string">"Сказать привет"</span>
+    }
+    
+    <span class="comment"># Украинский перевод</span>
+    <span class="function">strings_ua</span> = {
+        <span class="string">"welcome"</span>: <span class="string">"Привіт!"</span>
+    }
+            </div>
+
+            <h3>🔄 Динамические переводы</h3>
+            <div class="code-block">
+<span class="comment"># Перевод с подстановкой переменных</span>
+<span class="function">strings</span> = {
+    <span class="string">"welcome_user"</span>: <span class="string">"Hello, {name}!"</span>,
+    <span class="string">"items_count"</span>: <span class="string">"You have {count} items"</span>
+}
+
+<span class="comment"># Использование</span>
+<span class="function">text</span> = <span class="keyword">self</span>.<span class="function">strings</span>[<span class="string">"welcome_user"</span>].<span class="function">format</span>(name=<span class="string">"User"</span>)
+<span class="comment"># Результат: "Hello, User!"</span>
+            </div>
+
+            <h3>📦 Работа с языковым пакетом</h3>
+            <div class="code-block">
+<span class="comment"># Получить текущий язык</span>
+<span class="function">lang</span> = <span class="keyword">self</span>.<span class="function">translator</span>.<span class="function">lang</span>
+
+<span class="comment"># Получить строку из другого языка</span>
+<span class="function">string_en</span> = <span class="keyword">self</span>.<span class="function">translator</span>.<span class="function">strings</span>(<span class="string">"module_name"</span>, <span class="string">"en"</span>)
+
+<span class="comment"># Получить все переводы модуля</span>
+<span class="function">all_strings</span> = <span class="keyword">self</span>.<span class="function">strings</span>
+            </div>
+
+            <h3>📝 Строковые ключи для документации</h3>
+            <div class="code-block">
+<span class="function">strings</span> = {
+    <span class="string">"name"</span>: <span class="string">"ModuleName"</span>,
+    <span class="string">"_cls_doc"</span>: <span class="string">"Description of module"</span>,
+    <span class="string">"_cmd_doc_cmdname"</span>: <span class="string">"What command does"</span>,
+    <span class="string">"_ihandle_doc_handlername"</span>: <span class="string">"Inline handler description"</span>
+}
+            </div>
+        </div>
+
+        <div class="doc-section" id="premium-emoji">
+            <h2>⭐ Telegram Premium и Эмодзи</h2>
+            <p>Работа с Premium функциями, эмодзи и реакциями.</p>
+            
+            <h3>😊 Отправка реакций</h3>
+            <div class="code-block">
+<span class="comment"># Простая реакция</span>
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">send_reaction</span>(
+    chat,
+    message_id,
+    <span class="string">"🔥"</span>
+)
+
+<span class="comment"># Несколько реакций</span>
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">send_reaction</span>(
+    chat,
+    message_id,
+    [<span class="string">"🔥"</span>, <span class="string">"❤️"</span>, <span class="string">"👍"</span>]
+)
+
+<span class="comment"># Удалить реакцию</span>
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">send_reaction</span>(
+    chat,
+    message_id,
+    []
+)
+            </div>
+
+            <h3>⭐ Premium эмодзи (звезды)</h3>
+            <div class="code-block">
+<span class="comment"># Premium эмодзи (доступны только с Premium)</span>
+<span class="comment"># 💫 ✨ 🌟 💥 🔥 💯 🎉 🎊 👑 💎 🏆 🌈</span>
+
+<span class="comment"># Отправить Premium стикер</span>
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">send_file</span>(
+    chat,
+    <span class="string">"/path/to/premium_sticker.webp"</span>,
+    <span class="function">force_document</span>=<span class="keyword">True</span>
+)
+            </div>
+
+            <h3>🎭 Работа со стикерами</h3>
+            <div class="code-block">
+<span class="comment"># Получить набор стикеров</span>
+<span class="function">stickers</span> = <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">get_sticker_set</span>(<span class="string">"pack_name"</span>)
+
+<span class="comment"># Загрузить стикер</span>
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">upload_sticker_file</span>(<span class="string">"user_id"</span>, <span class="string">"/path/to/sticker.png"</span>)
+
+<span class="comment"># Создать стикерпак</span>
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>.<span class="function">create_sticker_set</span>(
+    <span class="string">"user_id"</span>,
+    <span class="string">"title"</span>,
+    <span class="string">"short_name"</span>,
+    [sticker]
+)
+            </div>
+
+            <h3>🎁 Подарки (Star Gifts)</h3>
+            <div class="code-block">
+<span class="comment"># Получить доступные подарки</span>
+<span class="function">gifts</span> = <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>(<span class="function">GetStarGiftsRequest</span>())
+
+<span class="comment"># Отправить подарок</span>
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">client</span>(<span class="function">TransferStarGiftRequest</span>(
+    <span class="function">user_id</span>=user_id,
+    <span class="function">gift_id</span>=gift_id,
+    <span class="function">stars</span>=stars_count
+))
+            </div>
+</div>
+
+        <div class="doc-section" id="advanced-inline">
+            <h2>📱 Продвинутый Inline</h2>
+            <p>Сложные примеры использования inline форм, кнопок и галерей.</p>
+            
+            <h3>🔄 inline.form() - Создание формы с кнопками</h3>
+            <div class="info-box">
+                <strong>📂 Исходник:</strong> <code>heroku/inline/core.py</code> → <code>InlineManager.form()</code>
+            </div>
+            <p>Создает inline сообщение с кнопками. Это основной метод для интерактивных интерфейсов.</p>
+            
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">InlineModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"InlineModule"</span>}
+    <span class="builtin">strings_ru</span> = {<span class="string">"_cmd_doc_menu"</span>: <span class="string">"Показать меню"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">menu_cmd</span>(<span class="self">self</span>, message):
+        <span class="string">"Показать меню"</span>
+        <span class="function">buttons</span> = [
+            {
+                <span class="string">"text"</span>: <span class="string">"⚙️ Настройки"</span>,
+                <span class="string">"callback"</span>: <span class="self">self</span>.<span class="function">settings_btn</span>
+            },
+            {
+                <span class="string">"text"</span>: <span class="string">"ℹ️ Информация"</span>,
+                <span class="string">"callback"</span>: <span class="self">self</span>.<span class="function">info_btn</span>
+            }
+        ]
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">inline</span>.<span class="function">form</span>(
+            <span class="string">"Выберите действие:"</span>,
+            buttons
+        )
+
+    <span class="keyword">async def</span> <span class="function">settings_btn</span>(<span class="self">self</span>, call):
+        <span class="string">"Обработчик нажатия"</span>
+        <span class="keyword">await</span> call.<span class="function">answer</span>(<span class="string">"Настройки открыты!"</span>, <span class="keyword">True</span>)
+
+    <span class="keyword">async def</span> <span class="function">info_btn</span>(<span class="self">self</span>, call):
+        <span class="string">"Обработчик информации"</span>
+        <span class="keyword">await</span> call.<span class="function">answer</span>(<span class="string">"Информация о боте"</span>, <span class="keyword">True</span>)
+</pre>
+            </div>
+
+            <h3>🔗 Цепочки форм (wizard)</h3>
+            <p>Послед��вательный показ форм - каждая следующая открывается после нажатия кнопки.</p>
+            
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="decorator">@loader.tds</span>
+<span class="decorator">@loader.owner</span>
+<span class="keyword">class</span> <span class="function">WizardModule</span>(<span class="builtin">loader.Module</span>):
+    <span class="builtin">strings</span> = {<span class="string">"name"</span>: <span class="string">"WizardModule"</span>}
+    <span class="builtin">strings_ru</span> = {<span class="string">"_cmd_doc_start"</span>: <span class="string">"Запустить визард"</span>}
+
+    <span class="decorator">@loader.command</span>()
+    <span class="keyword">async def</span> <span class="function">start_cmd</span>(<span class="self">self</span>, message):
+        <span class="string">"Запустить визард"</span>
+        <span class="function">buttons</span> = [
+            {<span class="string">"text"</span>: <span class="string">"📦 Товары"</span>, <span class="string">"callback"</span>: <span class="self">self</span>.<span class="function">step_products</span>},
+            {<span class="string">"text"</span>: <span class="string">"💰 Услуги"</span>, <span class="string">"callback"</span>: <span class="self">self</span>.<span class="function">step_services</span>}
+        ]
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">inline</span>.<span class="function">form</span>(<span class="string">"Что вас интересует?"</span>, buttons)
+
+    <span class="keyword">async def</span> <span class="function">step_products</span>(<span class="self">self</span>, call):
+        <span class="string">"Шаг 2 - выбор товара"</span>
+        <span class="function">buttons</span> = [
+            {<span class="string">"text"</span>: <span class="string">"✅ Купить"</span>, <span class="string">"callback"</span>: <span class="self">self</span>.<span class="function">buy_product</span>},
+            {<span class="string">"text"</span>: <span class="string">"🔙 Назад"</span>, <span class="string">"callback"</span>: <span class="self">self</span>.<span class="function">back_btn</span>}
+        ]
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">inline</span>.<span class="function">form</span>(
+            <span class="string">"Выберите товар:"</span>,
+            buttons,
+            message=call.<span class="function">message</span>
+        )
+        <span class="keyword">await</span> call.<span class="function">answer</span>()
+
+    <span class="keyword">async def</span> <span class="function">back_btn</span>(<span class="self">self</span>, call):
+        <span class="string">"Вернуться назад"</span>
+        <span class="function">buttons</span> = [
+            {<span class="string">"text"</span>: <span class="string">"📦 Товары"</span>, <span class="string">"callback"</span>: <span class="self">self</span>.<span class="function">step_products</span>},
+            {<span class="string">"text"</span>: <span class="string">"💰 Услуги"</span>, <span class="string">"callback"</span>: <span class="self">self</span>.<span class="function">step_services</span>}
+        ]
+        <span class="keyword">await</span> <span class="self">self</span>.<span class="function">inline</span>.<span class="function">form</span>(
+            <span class="string">"Что вас интересует?"</span>,
+            buttons,
+            message=call.<span class="function">message</span>
+        )
+        <span class="keyword">await</span> call.<span class="function">answer</span>()
+</pre>
+            </div>
+
+            <h3>📊 call.answer() - ответ на нажатие</h3>
+            <p>Ответ на callback запрос. Показывает уведомление или выполняет действие.</p>
+            
+            <div class="code-block">
+                <div class="code-block-header">module.py</div>
+                <pre><span class="keyword">async def</span> <span class="function">notify_btn</span>(<span class="self">self</span>, call):
+    <span class="comment"># Показать уведомление</span>
+    <span class="keyword">await</span> call.<span class="function">answer</span>(<span class="string">"Сохранено!"</span>, <span class="keyword">True</span>)
+
+<span class="keyword">async def</span> <span class="function">toast_btn</span>(<span class="self">self</span>, call):
+    <span class="comment"># Показать toast (исчезает)</span>
+    <span class="keyword">await</span> call.<span class="function">answer</span>(<span class="string">"Готово"</span>, <span class="keyword">False</span>)
+
+<span class="keyword">async def</span> <span class="function">url_btn</span>(<span class="self">self</span>, call):
+    <span class="comment"># Открыть URL</span>
+    <span class="keyword">await</span> call.<span class="function">answer</span>(<span class="string">"Открыть"</span>, <span class="keyword">True</span>, url=<span class="string">"https://t.me/my_channel"</span>)
+</pre>
+            </div>
+<span class="keyword">async def</span> <span class="function">menu_cmd</span>(self, message):
+    <span class="string">"Показать меню"</span>
+    <span class="function">buttons</span> = [
+        {
+            <span class="string">"text"</span>: <span class="string">"⚙️ Настройки"</span>,
+            <span class="string">"callback"</span>: <span class="function">self</span>.<span class="function">settings_btn</span>
+        },
+        {
+            <span class="string">"text"</span>: <span class="string">"ℹ️ Информация"</span>,
+            <span class="string">"callback"</span>: <span class="function">self</span>.<span class="function">info_btn</span>
+        }
+    ]
+    <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">inline</span>.<span class="function">form</span>(
+        <span class="string">"Выберите действие:"</span>,
+        buttons
+    )
+
+<span class="keyword">async def</span> <span class="function">settings_btn</span>(self, call):
+    <span class="string">"Обработчик нажатия"</span>
+    <span class="function">await</span> call.<span class="function">answer</span>(<span class="string">"Настройки открыты!"</span>, <span class="keyword">True</span>)
+
+<span class="keyword">async def</span> <span class="function">info_btn</span>(self, call):
+    <span class="string">"Обработчик информации"</span>
+    <span class="function">await</span> call.<span class="function">answer</span>(<span class="string">"Информация о боте"</span>, <span class="keyword">True</span>)
+            </div>
+
+            <h3>🔗 Цепочки форм (wizard)</h3>
+            <p>Последовательный показ форм - каждая следующая открывается после нажатия кнопки.</p>
+            <div class="code-block">
+<span class="function">strings</span> = {<span class="string">"name"</span>: <span class="string">"WizardModule"</span>}
+
+<span class="string">"strings_ru"</span>: {<span class="string">"_cmd_doc_start"</span>: <span class="string">"Запустить визард"</span>}
+
+<span class="keyword">@</span>loader.<span class="function">command</span>()
+<span class="keyword">async def</span> <span class="function">start_cmd</span>(self, message):
+    <span class="string">"Запустить визард"</span>
+    <span class="function">buttons</span> = [
+        {<span class="string">"text"</span>: <span class="string">"📦 Товары"</span>, <span class="string">"callback"</span>: <span class="function">self</span>.<span class="function">step_products</span>},
+        {<span class="string">"text"</span>: <span class="string">"💰 Услуги"</span>, <span class="string">"callback"</span>: <span class="function">self</span>.<span class="function">step_services</span>}
+    ]
+    <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">inline</span>.<span class="function">form</span>(<span class="string">"Что вас интересует?"</span>, buttons)
+
+<span class="keyword">async def</span> <span class="function">step_products</span>(self, call):
+    <span class="string">"Шаг 2 - выбор товара"</span>
+    <span class="function">buttons</span> = [
+        {<span class="string">"text"</span>: <span class="string">"✅ Купить"</span>, <span class="string">"callback"</span>: <span class="function">self</span>.<span class="function">buy_product</span>},
+        {<span class="string">"text"</span>: <span class="string">"🔙 Назад"</span>, <span class="string">"callback"</span>: <span class="function">self</span>.<span class="function">back_btn</span>}
+    ]
+    <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">inline</span>.<span class="function">form</span>(
+        <span class="string">"Выберите товар:"</span>,
+        buttons,
+        <span class="function">message</span>=call.<span class="function">message</span>  <span class="comment"># Редактируем текущее</span>
+    )
+    <span class="keyword">await</span> call.<span class="function">answer</span>()
+
+<span class="keyword">async def</span> <span class="function">step_services</span>(self, call):
+    <span class="string">"Шаг 2 - выбор услуги"</span>
+    <span class="function">buttons</span> = [
+        {<span class="string">"text"</span>: <span class="string">"✅ Заказать"</span>, <span class="string">"callback"</span>: <span class="function">self</span>.<span class="function">order_service</span>},
+        {<span class="string">"text"</span>: <span class="string">"🔙 Назад"</span>, <span class="string">"callback"</span>: <span class="function">self</span>.<span class="function">back_btn</span>}
+    ]
+    <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">inline</span>.<span class="function">form</span>(
+        <span class="string">"Выберите услугу:"</span>,
+        buttons,
+        <span class="function">message</span>=call.<span class="function">message</span>
+    )
+    <span class="keyword">await</span> call.<span class="function">answer</span>()
+
+<span class="keyword">async def</span> <span class="function">back_btn</span>(self, call):
+    <span class="string">"Вернуться назад"</span>
+    <span class="function">buttons</span> = [
+        {<span class="string">"text"</span>: <span class="string">"📦 Товары"</span>, <span class="string">"callback"</span>: <span class="function">self</span>.<span class="function">step_products</span>},
+        {<span class="string">"text"</span>: <span class="string">"💰 Услуги"</span>, <span class="string">"callback"</span>: <span class="function">self</span>.<span class="function">step_services</span>}
+    ]
+    <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">inline</span>.<span class="function">form</span>(
+        <span class="string">"Что вас интересует?"</span>,
+        buttons,
+        <span class="function">message</span>=call.<span class="function">message</span>
+    )
+    <span class="keyword">await</span> call.<span class="function">answer</span>()
+            </div>
+
+            <h3>📊 call.answer() - ответ на нажатие</h3>
+            <p>Ответ на callback запрос. Показывает уведомление или выполняет действие.</p>
+            <div class="code-block">
+<span class="string">"Сигнатура: async def answer(self, text=None, show_alert=True, url=None)"</span>
+<span class="string">"Параметры:"</span>
+<span class="string">"  text: str - текст уведомления"</span>
+<span class="string">"  show_alert: bool - показать как alert (True) или toast (False)"</span>
+<span class="string">"  url: str - URL для открытия"</span>
+
+<span class="keyword">async def</span> <span class="function">notify_btn</span>(self, call):
+    <span class="comment"># Показать уведомление</span>
+    <span class="keyword">await</span> call.<span class="function">answer</span>(<span class="string">"Сохранено!"</span>, <span class="keyword">True</span>)
+
+<span class="keyword">async def</span> <span class="function">toast_btn</span>(self, call):
+    <span class="comment"># Показать toast (исчезает)</span>
+    <span class="keyword">await</span> call.<span class="function">answer</span>(<span class="string">"Готово"</span>, <span class="keyword">False</span>)
+
+<span class="keyword">async def</span> <span class="function">url_btn</span>(self, call):
+    <span class="comment"># Открыть URL</span>
+    <span class="keyword">await</span> call.<span class="function">answer</span>(<span class="string">"Открыть"</span>, <span class="keyword">True</span>, url=<span class="string">"https://t.me/my_channel"</span>)
+            </div>
+
+            <h3>🖼️ gallery.show() - Галерея изображений</h3>
+            <div class="info-box">
+                <strong>Исходник:</strong> <code>heroku/inline/galleries.py</code> → <code>InlineGallery.show()</code>
+            </div>
+            <p>Показывает галерею с возможностью листать изображения.</p>
+            <div class="code-block">
+<span class="string">"Сигнатура: async def show(self, name, items, chat_id=None)"</span>
+<span class="string">"Параметры:"</span>
+<span class="string">"  name: str - уникальный ID галереи"</span>
+<span class="string">"  items: list - список элементов"</span>
+<span class="string">"  chat_id: int - куда отправить (опционально)"</span>
+<span class="string">"Элемент: {photo, title, description}"</span>
+
+<span class="function">strings</span> = {<span class="string">"name"</span>: <span class="string">"GalleryModule"</span>}
+
+<span class="string">"strings_ru"</span>: {<span class="string">"_cmd_doc_gal"</span>: <span class="string">"Показать галерею"</span>}
+
+<span class="keyword">@</span>loader.<span class="function">command</span>()
+<span class="keyword">async def</span> <span class="function">gal_cmd</span>(self, message):
+    <span class="string">"Показать галерею"</span>
+    <span class="function">items</span> = [
+        {
+            <span class="string">"photo"</span>: <span class="string">"https://example.com/photo1.jpg"</span>,
+            <span class="string">"title"</span>: <span class="string">"Фото 1"</span>,
+            <span class="string">"description"</span>: <span class="string">"Описание первого фото"</span>
+        },
+        {
+            <span class="string">"photo"</span>: <span class="string">"https://example.com/photo2.jpg"</span>,
+            <span class="string">"title"</span>: <span class="string">"Фото 2"</span>,
+            <span class="string">"description"</span>: <span class="string">"Описание второго фото"</span>
+        },
+        {
+            <span class="string">"photo"</span>: <span class="string">"https://example.com/photo3.jpg"</span>,
+            <span class="string">"title"</span>: <span class="string">"Фото 3"</span>
+        }
+    ]
+    <span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">gallery</span>.<span class="function">show</span>(<span class="string">"my_gallery"</span>, items)
+            </div>
+
+            <h3>📝 list.show() - Список с прокруткой</h3>
+            <div class="code-block">
+<span class="string">"Сигнатура: async def show(self, title, items)"</span>
+
+<span class="function">items</span> = [
+    {<span class="string">"title"</span>: <span class="string">"Элемент 1"</span>, <span class="string">"description"</span>: <span class="string">"Описание 1"</span>},
+    {<span class="string">"title"</span>: <span class="string">"Элемент 2"</span>, <span class="string">"description"</span>: <span class="string">"Описание 2"</span>}
+]
+
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">list</span>.<span class="function">show</span>(<span class="string">"Список элементов"</span>, items)
+            </div>
+            </div>
+
+            <h3>📝 Список с прокруткой</h3>
+            <div class="code-block">
+<span class="comment"># Показать список</span>
+<span class="function">items</span> = [
+    {<span class="string">"title"</span>: <span class="string">"Элемент 1"</span>, <span class="string">"description"</span>: <span class="string">"Описание 1"</span>},
+    {<span class="string">"title"</span>: <span class="string">"Элемент 2"</span>, <span class="string">"description"</span>: <span class="string">"Описание 2"</span>}
+]
+
+<span class="keyword">await</span> <span class="keyword">self</span>.<span class="function">list</span>.<span class="function">show</span>(
+    <span class="string">"Список элементов"</span>,
+    items
+)
+            </div>
+        </div>
+
+        <div class="doc-section" id="security">
+            <h2>🔒 Безопасность</h2>
+            <div class="info-box warning">
+                <strong>⚠️ Важно:</strong> Всегда проверяйте модули перед установкой. Вредоносные модули могут получить доступ к вашему аккаунту.
+            </div>
+            <h3>Защита API</h3>
+            <div class="code-block">
+<span class="comment"># Включение защиты от флуда API</span>
+.<span class="function">api_fw_protection</span>
+            </div>
+            <h3>Рекомендации</h3>
+            <ul>
+                <li>Не устанавливайте модули из неизвестных источников</li>
+                <li>Включите защиту API флуда (`.api_fw_protection`)</li>
+                <li>Не устанавливайте много модулей одновременно</li>
+                <li>Регулярно проверяйте активность аккаунта</li>
+            </ul>
+        </div>
+
+        <div class="doc-section" id="vs-hikka">
+            <h2>🔄 Heroku vs Hikka</h2>
+            <table class="feature-table">
+                <thead>
+                    <tr>
+                        <th>Функция</th>
+                        <th>Heroku</th>
+                        <th>Hikka</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Обновления</td>
+                        <td><span class="badge badge-new">Активные</span></td>
+                        <td><span class="badge badge-deprecated">Архив</span></td>
+                    </tr>
+                    <tr>
+                        <td>Совместимость с модулями</td>
+                        <td>FTG, Hikka, GeekTG</td>
+                        <td>FTG, GeekTG</td>
+                    </tr>
+                    <tr>
+                        <td>Безопасность</td>
+                        <td>Улучшенная</td>
+                        <td>Базовая</td>
+                    </tr>
+                    <tr>
+                        <td>Веб-интерфейс</td>
+                        <td>Да</td>
+                        <td>Да</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="doc-section" id="vs-legacy">
+            <h2>🔄 Heroku vs Legacy</h2>
+            <table class="feature-table">
+                <thead>
+                    <tr>
+                        <th>Функция</th>
+                        <th>Heroku</th>
+                        <th>Legacy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Основа</td>
+                        <td>Hikka</td>
+                        <td>Heroku</td>
+                    </tr>
+                    <tr>
+                        <td>Python</td>
+                        <td>3.10+</td>
+                        <td>3.9-3.12</td>
+                    </tr>
+                    <tr>
+                        <td>Совместимость</td>
+                        <td>FTG, Hikka, GeekTG</td>
+                        <td>FTG, Hikka, GeekTG</td>
+                    </tr>
+                    <tr>
+                        <td>Статус</td>
+                        <td>Активный</td>
+                        <td>Активный</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="text-align: center; padding: 2rem;">
+            <a href="../index.html" class="btn btn-primary">← Назад на главную</a>
+        </div>
+    </main>
 
     <script>
+        // Toggle sidebar
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('mainContent').classList.toggle('shifted');
+        }
+
+        // Smooth scroll to section
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+                // Close sidebar on mobile
+                if (window.innerWidth < 768) {
+                    toggleSidebar();
+                }
+            });
+        });
+
+        // Format code blocks to look like VS Code
+        document.querySelectorAll('.code-block').forEach(block => {
+            let html = block.innerHTML;
+            
+            // Add newlines before key structures
+            const replacements = [
+                { pattern: /(<span class="keyword">async def<\/span>)/g, replace: '\n$1' },
+                { pattern: /(<span class="keyword">def<\/span>)/g, replace: '\n$1' },
+                { pattern: /(<span class="keyword">class<\/span>)/g, '\n$1' },
+                { pattern: /(<span class="keyword">return<\/span>)/g, '\n$1' },
+                { pattern: /(<span class="keyword">if<\/span>)/g, '\n$1' },
+                { pattern: /(<span class="keyword">for<\/span>)/g, '\n$1' },
+                { pattern: /(<span class="keyword">while<\/span>)/g, '\n$1' },
+                { pattern: /(<span class="keyword">with<\/span>)/g, '\n$1' },
+                { pattern: /(<span class="keyword">try<\/span>)/g, '\n$1' },
+                { pattern: /(<span class="keyword">except<\/span>)/g, '\n$1' },
+                { pattern: /(<span class="keyword">finally<\/span>)/g, '\n$1' },
+                { pattern: /(<span class="keyword">async with<\/span>)/g, '\n$1' },
+                { pattern: /(<\/span>\s*<span class="comment">#)/g, '</span>\n        <span class="comment">#' },
+                { pattern: /(<span class="string">"[^"]*"[^<]*)<\/span>/g, '$1</span>\n        ' },
+            ];
+            
+            replacements.forEach(r => {
+                html = html.replace(r.pattern, r.replace);
+            });
+            
+            // Clean up extra newlines at start
+            html = html.replace(/^\s*\n/, '');
+            
+            // Wrap in pre for proper formatting
+            block.innerHTML = '<pre>' + html + '</pre>';
+        });
+
+        // Particles
         const particlesContainer = document.getElementById('particles');
         const colors = ['var(--primary)', 'var(--secondary)', 'var(--accent)', '#ffffff'];
         
@@ -408,24 +3020,6 @@
             particle.style.opacity = Math.random() * 0.6 + 0.3;
             particlesContainer.appendChild(particle);
         }
-
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 20;
-                const rotateY = (centerX - x) / 20;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
-            });
-        });
     </script>
 </body>
 </html>
